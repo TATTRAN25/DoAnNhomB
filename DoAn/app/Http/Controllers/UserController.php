@@ -9,9 +9,9 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function productmanagement()
+    public function addproduct()
     {
-        return view('product.productmanagement');
+        return view('product.addproduct');
     }
 
 }
