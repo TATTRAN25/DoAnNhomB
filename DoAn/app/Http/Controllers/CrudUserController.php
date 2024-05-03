@@ -14,4 +14,9 @@ class CrudUserController extends Controller
     {
         return view('crud.login');
     }
+
+    public function viewAccountInfo()
+    {
+        return view('crud.account');
+    }
 }
