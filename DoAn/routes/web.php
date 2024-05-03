@@ -15,9 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('login', [CrudUserController::class, 'login'])->name('login');
-Route::get('register', [CrudUserController::class, 'register'])->name('register');
-
-Route::get('account', [CrudUserController::class, 'viewAccountInfo'])->name('account');
 
 Route::get('/', function () {
     return view('welcome');
