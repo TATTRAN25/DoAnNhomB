@@ -23,7 +23,7 @@
 
 
     <div class="main">
-        <img class="product-image img" src="./images/1694392895130.png" alt="Áo len">
+        <img class="product-image img" src="{{ asset('images/1694392895130.png')}}" alt="Áo len">
         <div class="product-info">
             <h1>Áo len tay lỡ form rộng unisex, Áo len nam nữ form rộng</h1>
             <p class="price">11.000.000đ - <del>22.000.000</del></p>
