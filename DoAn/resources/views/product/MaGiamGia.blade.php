@@ -17,7 +17,7 @@
                 <input type="text" placeholder="Tìm kiếm...">
                 <button type="submit">Tìm kiếm</button>
             </div>
-            <img class="image" src="./images/logo.jpg">
+            <img class="image" src="{{ asset('images/logo.jpg')}}">
         </div>
     </nav>
 

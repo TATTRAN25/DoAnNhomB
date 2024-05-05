@@ -19,14 +19,14 @@
                 <input type="text" placeholder="Tìm kiếm...">
                 <button type="submit">Tìm kiếm</button>
             </div>
-            <img class="image" src="./images/logo.jpg">
+            <img class="image" src="{{ asset('images/logo.jpg')}}">
         </div>
     </nav>
 
 
     <div class="row">
         <div class="column">
-            <img class="column" width="300px" height="300px" src="./images/1694392895130.png" alt="Áo len">
+            <img class="column" width="300px" height="300px" src="{{ asset('images/1694392895130.png')}}" alt="Áo len">
             <div class="column">
                 <h1>Áo len tay lỡ form rộng unisex, Áo len nam nữ form rộng</h1>
                 <p class="price">11.000.000đ - <del>22.000.000</del></p>
