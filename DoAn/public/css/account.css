@@ -1,5 +1,12 @@
 .side {
     background: #f9f1f1;
+    position: fixed;
+    left: 0;
+    height: 100%;
+}
+
+.side a{
+    color: black;
 }
 
 td {
@@ -29,4 +36,17 @@ a {
     width: fit-content;
     margin-left: 60%;
     border-radius: 5px;
+}
+
+.main{
+    position: fixed;
+    right: 0;
+}
+
+i{
+    float: right;
+}
+
+.edit{
+    float: none;
 }
