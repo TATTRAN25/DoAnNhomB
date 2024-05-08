@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('addproduct', [UserController::class, 'addproduct'])->name('user.addproduct');
+Route::get('tat', [ProductController::class, 'tat']);
+Route::get('addproduct', [ProductController::class, 'addProduct'])->name('user.addproduct');
 
 Route::get('/', function () {
     return view('welcome');
