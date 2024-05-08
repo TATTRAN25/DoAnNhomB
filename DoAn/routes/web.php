@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('productmanagement', [UserController::class, 'productmanagement'])->name('user.productmanagement');
+Route::get('tat', [ProductController::class, 'tat']);
+
+Route::get('productmanagement', [ProductController::class, 'productManagement'])->name('user.productmanagement');
 
 Route::get('/', function () {
     return view('welcome');

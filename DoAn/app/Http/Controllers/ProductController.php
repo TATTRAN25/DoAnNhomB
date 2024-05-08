@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
-class UserController extends Controller
+class ProductController extends Controller
 {
-    public function productmanagement()
+    public function productManagement()
     {
         return view('product.productmanagement');
     }
