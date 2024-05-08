@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('editproduct', [UserController::class, 'editproduct'])->name('user.editproduct');
+Route::get('tat', [ProductController::class, 'tat']);
+Route::get('editproduct', [ProductController::class, 'editProduct'])->name('user.editproduct');
 
 Route::get('/', function () {
     return view('welcome');
