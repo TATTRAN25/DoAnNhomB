@@ -3,7 +3,11 @@
 @section('title', 'Checkout')
 @section('content')
     <main class="checkout-main">
-        <h2 class="heading-secondary">Thanh toán</h2>
+        <div class="info-page d-flex justify-content-center align-items-center">
+                <h2 class="heading-secondary">Thanh toán</h2>
+                <i class="money-icon fa-solid fa-money-bill"></i>
+        </div>
+
         <section class="section-checkout">
             <div class="checkout-info">
                  <div class="info-products">
@@ -44,8 +48,13 @@
                     <form action="#" method="post">
                         <label for="name">Họ và tên:</label>
                         <input type="text" id="name" name="name" required>
+
+                        <label for="phone">Số điện thoại:</label>
+                        <input type="text" id="phone" name="phone" required>
+
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" required>
+
                         <label for="address">Địa chỉ:</label>
                         <textarea id="address" name="address" required></textarea>
 
