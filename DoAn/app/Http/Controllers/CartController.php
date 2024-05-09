@@ -10,9 +10,4 @@ class CartController extends Controller
     {
         return view('products.carts');
     }
-
-    public function checkoutProduct()
-    {
-        return view('products.checkout');
-    }
 }

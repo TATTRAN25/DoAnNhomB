@@ -4,10 +4,12 @@
 @section('content')
     <main class="main-cart">
         <section class="cart-info">
+            <div class="info-page d-flex justify-content-center align-items-center">
+                <h2 class="heading-secondary">Giỏ hàng</h2>
+                <i class="cart-icon fa-solid fa-cart-shopping"></i>
+            </div>
             
-            <h2 class="heading-secondary">Giỏ hàng</h2>
-            
-            <div class="info-products">
+            <div class="info-products p-4">
                 <table>
                     <thead class="product-head">
                         <tr>
