@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +24,11 @@ Route::get('addproduct', [ProductController::class, 'addProduct'])->name('user.a
 
 Route::get('editproduct', [ProductController::class, 'editProduct'])->name('user.editproduct');
 
+Route::get('/home', [HomeController::class, 'homeProduct'])->name('home_products');
+Route::get('/products/cart_details', [CartController::class, 'cartDetail'])->name('products.cart');
+Route::get('/products/checkout', [CartController::class, 'checkoutProduct'])->name('products.checkout');
 
 Route::get('/', function () {
     return view('welcome');
 });
+
