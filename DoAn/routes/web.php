@@ -21,6 +21,10 @@ Route::get('addproduct', [ProductController::class, 'addProduct'])->name('user.a
 
 Route::get('editproduct', [ProductController::class, 'editProduct'])->name('user.editproduct');
 
+Route::get('cart', [ProductController::class, 'cart'])->name('user.cart');
+
+Route::get('detailproduct', [ProductController::class, 'detailProduct'])->name('user.detailproduct');
+
 
 Route::get('/', function () {
     return view('welcome');

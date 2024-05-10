@@ -23,5 +23,14 @@ class ProductController extends Controller
     {
         return view('product.editproduct');
     }
-    
+
+    public function cart()
+    {
+        return view('product.cart');
+    }
+
+    public function detailProduct()
+    {
+        return view('product.detailproduct');
+    }
 }
