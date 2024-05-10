@@ -4,9 +4,21 @@
     box-sizing: border-box;
     float: left;
     width: 50%;
-    padding: 15px;
+}
+.text-h1 {
+    padding: 100px;
 }
 
+.product-info
+{
+    float: right;
+}
+
+.product-image
+{
+    height: 300px;
+    width: 300px;
+}
 ------------------------------------------- 
 .container {
     background-color: #095675;
@@ -44,15 +56,6 @@
     cursor: pointer;
 }
 
-.image {
-    width: 100px;
-    height: 100px;
-}
-
-.textbox {
-    width: 80%;
-    padding: 20px;
-}
 
 .btn {
     margin: 10px;
@@ -66,3 +69,4 @@
     border-radius: 50%;
     background-color: yellow;
 }
+----------------------------------------------

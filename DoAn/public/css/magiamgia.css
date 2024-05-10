@@ -76,3 +76,13 @@
     border: none;
     cursor: pointer;
   }
+.main {
+  padding: 30px;
+  align-items: center;
+}
+.text-h1 {
+  margin: 5%;
+}
+.text-main {
+  text-align: center;
+}
