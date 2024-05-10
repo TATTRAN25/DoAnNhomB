@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class CartController extends Controller
+class ProductController extends Controller
 {
-
     public function checkoutProduct()
     {
         return view('products.checkout');
