@@ -201,3 +201,14 @@ body {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+.cart-icon{
+    font-size: 24px;
+    color: #12b886;
+    margin-top: 9px;
+    color: #fff;
+}
+.no-underline{
+    text-decoration: none !important;
+    font-size: 20px;
+    font-weight: bold;
+}

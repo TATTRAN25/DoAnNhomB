@@ -5,6 +5,7 @@
     <title>Chợ nhỏ</title>
     <link rel="stylesheet" href="{{ asset('style.css') }}">
     <link rel="stylesheet" href="{{ asset('bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -32,8 +33,13 @@
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-primary me-5" type="button">Search</button>
                 </form>
-                <img src="logo.jpg" style="width: 60px;" class="rounded-pill" id="left">
+                
             </div>
+            <div class="row">
+                    <i class="cart-icon fa-solid fa-cart-shopping"></i>
+                    <a href="#" class="no-underline text-white">Giỏ Hàng</a>
+                </div>
+                <img src="logo.jpg" style="width: 60px;" class="rounded-pill" id="left">
         </div>
     </nav>
     <div class="container">
@@ -44,6 +50,7 @@
                 <div class="cardbody">
                     <div class="d-grid gap-2 col-3 mx-auto">
                         <a href="">Quần áo</a>
+                        <button type="button" class="btn btn-primary me-5">Mua</button>
                     </div>
                 </div>
             </div>
@@ -53,6 +60,7 @@
                 <div class="cardbody">
                     <div class="d-grid gap-2 col-3 mx-auto">
                         <a href="">Quần áo</a>
+                        <button type="button" class="btn btn-primary me-5">Mua</button>
                     </div>
                 </div>
             </div>
@@ -62,6 +70,7 @@
                 <div class="cardbody">
                     <div class="d-grid gap-2 col-3 mx-auto">
                         <a href="">Quần áo</a>
+                        <button type="button" class="btn btn-primary me-5">Mua</button>
                     </div>
                 </div>
             </div>
@@ -71,6 +80,7 @@
                 <div class="cardbody">
                     <div class="d-grid gap-2 col-3 mx-auto">
                         <a href="">Quần áo</a>
+                        <button type="button" class="btn btn-primary me-5">Mua</button>
                     </div>
                 </div>
             </div>
@@ -83,6 +93,7 @@
                 <div class="cardbody">
                     <div class="d-grid gap-2 col-3 mx-auto">
                         <a href="">Quần áo</a>
+                        <button type="button" class="btn btn-primary me-5">Mua</button>
                     </div>
                 </div>
             </div>
@@ -92,6 +103,7 @@
                 <div class="cardbody">
                     <div class="d-grid gap-2 col-3 mx-auto">
                         <a href="">Quần áo</a>
+                        <button type="button" class="btn btn-primary me-5">Mua</button>
                     </div>
                 </div>
             </div>
@@ -101,6 +113,7 @@
                 <div class="cardbody">
                     <div class="d-grid gap-2 col-3 mx-auto">
                         <a href="">Quần áo</a>
+                        <button type="button" class="btn btn-primary me-5">Mua</button>
                     </div>
                 </div>
             </div>
@@ -110,6 +123,7 @@
                 <div class="cardbody">
                     <div class="d-grid gap-2 col-3 mx-auto">
                         <a href="#" class="">Quần áo</a>
+                        <button type="button" class="btn btn-primary me-5">Mua</button>
                     </div>
                 </div>
             </div>
