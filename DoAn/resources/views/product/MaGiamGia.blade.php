@@ -7,11 +7,26 @@
         <img class="product-image" src="{{ asset('images/1694392895130.png')}}" alt="Áo len">
         <div class="product-info">
             <h1 class="text-h2">Áo len tay lỡ form rộng unisex, Áo len nam nữ form rộng</h1>
-                <div class="text-main">
-                <p class="price">11.000.000đ - <del>22.000.000</del></p>
-                <p>Ưu đãi hiện tại: <b><i>Giảm giá 50%</i></b></p>
-                <p>Số lượng còn lại: 5024 sản phẩm</p>
-                Nhập mã giảm giá: <input type="text"><button>Áp dụng</button>
+                <form action="">
+                    <div class="row">
+                        <div class="col"><label for="">Mã giảm giá: </label><input type="text"></div>
+                        <div class="col"><label for="">Tên mã: </label><input type="text"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><label for="">Số lượng: </label><input type="text"></div>
+                        <div class="col"><label for="">Giá trị: </label><input type="text"></div>
+                        <div class="col"><label for="">Hạn sử dụng: </label><input type="text"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><label for="">Mô tả: </label><input type="text"></div>
+                    </div>
+                    <button>Áp dụng</button>
+                </form>    
+            
+                
+                
+                
+                
             </div>
 
         </div>
