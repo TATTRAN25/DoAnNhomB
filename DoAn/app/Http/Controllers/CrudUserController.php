@@ -14,4 +14,29 @@ class CrudUserController extends Controller
     {
         return view('crud.login');
     }
+
+    public function authUser(Request $request) 
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+        
+        $credentals = $request->only('email', 'password');
+
+
+        if (Auth::attempt($credentals)) {
+            return redirect('gialap')->withSuccess("Login successfully :)");
+        }
+
+        return redirect('login')->withSuccess("Login failed :(");
+    }
+
+    public function giaLap()
+    {
+        if (Auth::check()) {
+            $users = User::all();
+            return view('crud.gialap', ['users' => $users]);
+        }
+    }
 }

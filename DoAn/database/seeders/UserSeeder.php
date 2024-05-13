@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 use function Laravel\Prompts\table;
 
@@ -18,7 +19,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'user_name' => 'admin123',
             'email' => 'admin123@gmail.com',
-            'password' => '123456',
+            'password' => Hash::make('123456'),
             'is_admin' => '1' 
         ]);
     }
