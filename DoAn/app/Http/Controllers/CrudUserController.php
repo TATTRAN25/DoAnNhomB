@@ -26,17 +26,9 @@ class CrudUserController extends Controller
 
 
         if (Auth::attempt($credentals)) {
-            return redirect('gialap')->withSuccess("Login successfully :)");
+            return redirect('')->withSuccess("Login successfully :)");
         }
 
         return redirect('login')->withSuccess("Login failed :(");
-    }
-
-    public function giaLap()
-    {
-        if (Auth::check()) {
-            $users = User::all();
-            return view('crud.gialap', ['users' => $users]);
-        }
     }
 }

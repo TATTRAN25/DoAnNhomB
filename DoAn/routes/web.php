@@ -17,8 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('login', [CrudUserController::class, 'login'])->name('login');
 Route::post('login', [CrudUserController::class, 'authUser'])->name('auth.user');
 
-Route::get('gialap', [CrudUserController::class, 'giaLap'])->name('gialap');
-
 Route::get('/', function () {
     return view('welcome');
 });
