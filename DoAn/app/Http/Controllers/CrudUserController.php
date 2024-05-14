@@ -19,4 +19,9 @@ class CrudUserController extends Controller
     {
         return view('crud.register');
     }
+
+    public function postRegister(Request $request)
+    {
+        
+    }
 }

@@ -13,7 +13,7 @@
                 <form action="#" method="post">
                     @csrf
                     <div class="mb-3">
-                        <input type="text" name="user" id="user" placeholder="Nhập tài khoản" class="form-control" required autofocus>
+                        <input type="text" name="username" id="username" placeholder="Nhập tài khoản" class="form-control" required autofocus>
                     </div>
                     <div class="mb-3">
                         <input type="password" name="password" id="password" placeholder="Nhập mật khẩu" class="form-control" required autofocus>

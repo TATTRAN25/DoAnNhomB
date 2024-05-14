@@ -12,17 +12,36 @@
                 <h2 class="text-center">Đăng ký</h2>
                 <form action="#" method="post">
                     @csrf
-                    <div class="mb-3">
-                        <input type="text" name="user" id="user" placeholder="Nhập tài khoản" class="form-control" required autofocus>
+                    <div class="input-group mb-3">
+                        <input type="text" name="username" id="username" placeholder="Nhập tài khoản" class="form-control" required autofocus>
                     </div>
-                    <div class="mb-3">
-                        <input type="password" name="password" id="password" placeholder="Nhập mật khẩu" class="form-control" required autofocus>
+
+                    <div class="input-group mb-3">
+                        <input type="password" name="password" id="password" placeholder="Nhập mật khẩu" class="form-control" required>
                     </div>
+
                     <div class="mb-3">
-                        <input type="password" name="retype" id="retype" placeholder="Nhập lại mật khẩu" class="form-control" required autofocus>
+                        <input type="password" name="retype" id="retype" placeholder="Nhập lại mật khẩu" class="form-control" required>
                     </div>
+
+                    <div class="input-group mb-3">
+                        <input type="text" name="fullname" id="fullname" placeholder="Nhập họ và tên" class="form-control">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="number" name="phone" id="phone" placeholder="Nhập số điện thoại" class="form-control">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="email" name="email" id="email" placeholder="Nhập email" class="form-control" required>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input type="file" name="avatar" id="avatar" class="form-control">
+                    </div>
+
                     <div class="d-grid mx-auto">
-                        <button type="submit" class="btn-login"><a href="{{ route('login') }}">Đăng ký</a></button>
+                        <button type="submit" class="btn-login">Đăng ký</button>
                     </div>
                 </form>
                 <h3 class="hr-lines my-3">Hoặc</h3>
