@@ -30,12 +30,13 @@
                         @endif
                     </p>
                     </div>
+                    
                     <p class="product-desc">
-                        {{$product->product_detail}}
+                    {{$product->product_detail}}
                     </p>
                     
                     <p class="product-category">Danh mục sản phẩm: <span>{{$product->category->category_name}}</span></p>
-                    <button class="btn btn-info mb-3">Voucher của sản phẩm</button>
+                    <p class="product-voucher">Voucher của sản phẩm: <span style="color: #35dfac; font-size: 18px;">{{$product->voucher->voucher_name}}</span></p>
 
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
