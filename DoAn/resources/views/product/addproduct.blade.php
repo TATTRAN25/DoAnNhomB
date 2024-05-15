@@ -1,55 +1,113 @@
 @extends('layout')
 
 @section('title', 'Checkout')
+
 @section('content')
+
 <!-- Main -->
 <main>
-    <main>
-        <div class="container">
-            <div class="left-sidebar">
-                <h2>Chọn ảnh sản phẩm</h2>
-                <img class="logo" src="{{ asset('img/logoChoNho.jpg') }}" alt="Logo Chợ Nhỏ" />
-                <input type="file" accept="image/*">
-            </div>
-            <div class="content">
-                <h1>Thêm Sản Phẩm</h1>
-                <form action="/edit-product" method="POST">
-                    <div class="form-group">
-                        <label for="product-id">Mã sản phẩm:</label>
-                        <input type="text" id="product-id" name="product-id" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="product-name">Tên Sản Phẩm:</label>
-                        <input type="text" id="product-name" name="product-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="quantity">Số lượng:</label>
-                        <input type="number" id="quantity" name="quantity" min="0" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="status">Trạng thái:</label>
-                        <input type="text" id="status" name="status" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Giá Sản Phẩm:</label>
-                        <input type="number" id="price" name="price" min="0" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="voucher_detail">Mô tả:</label>
-                        <textarea id="voucher_detail" name="voucher_detail" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="category_id">Danh Mục:</label>
-                        <input type="text" id="category_id" name="category_id" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="voucher_id">Mã Voucher:</label>
-                        <input type="text" id="voucher_id" name="voucher_id" required>
-                    </div>
-                    <button type="button-add">Thêm</button>
-                </form>
-            </div>
+    <div class="container">
+        <div class="left-sidebar">
+            <h2>Chọn ảnh sản phẩm</h2>
+            <img id="product_photo" class="logo" src="{{ asset('img/logoChoNho.jpg') }}" alt="Logo Chợ Nhỏ" />
         </div>
-    </main>
+        <div class="content">
+            <h1>Thêm Sản Phẩm</h1>
+
+            <form method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
+                @csrf
+                <!-- Tên sản phẩm -->
+                <div class="form-group">
+                    <label for="product_name">Tên Sản Phẩm:</label>
+                    <input type="text" id="product_name" name="product_name" required autofocus>
+                    @error('product_name')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <!-- Ảnh sản phẩm -->
+                <div class="form-group">
+                    <label for="product_name">Ảnh Sản Phẩm:</label>
+                    <input id="product_photo" type="file" class="form-control @error('product_photo') is-invalid @enderror" name="product_photo" required autocomplete="product_photo" onchange="previewImage(event)">
+                    @error('product_name')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <!-- Số lượng -->
+                <div class="form-group">
+                    <label for="quantity">Số lượng:</label>
+                    <input type="number" id="quantity" name="quantity" min="0" required autofocus>
+                    @error('quantity')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <!-- Trạng thái -->
+                <div class="form-group">
+                    <label for="status">Trạng thái:</label>
+                    <!-- <input type="text" id="status" name="status" required autofocus> -->
+                    <select id="status" name="status">
+                        <option value="Còn hàng" >Còn hàng</option>
+                        <option value="Hết hàng" >Hết hàng</option>
+                    </select>
+                    @error('status')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <!-- Giá sản phẩm -->
+                <div class="form-group">
+                    <label for="price">Giá Sản Phẩm:</label>
+                    <input type="number" id="price" name="price" min="0" required autofocus>
+                    @error('price')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <!-- Mô tả -->
+                <div class="form-group">
+                    <label for="product_detail">Mô tả:</label>
+                     <textarea id="product_detail" name="product_detail" required autofocus></textarea>
+                    @error('product_detail')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <!-- Mã danh mục -->
+                <div class="form-group">
+                    <label for="category_id">Danh mục</label>
+                    <select name="category_id" id="category_id" class="form-control">
+                        <option value="">Chọn danh mục</option>
+                        @foreach ($categories as $category)
+                        <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
+                        @endforeach
+                    </select>
+                    @error('category_id')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <!-- Mã người dùng -->
+                <div class="form-group">
+                    <label for="user_id">Người bán</label>
+                    <select name="user_id" id="user_id" class="form-control">
+                        <option value="">Chọn người bán</option>
+                        @foreach ($users as $user)
+                        <option value="{{ $user->user_id }}">{{ $user->user_name }}</option>
+                        @endforeach
+                    </select>
+                    @error('user_id')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <button type="submit">Thêm</button>
+            </form>
+        </div>
+    </div>
 </main>
+
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById('product_photo');
+            output.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
 @endsection

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -14,19 +15,25 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
-            'phone_number' => '0123456789',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('password'),
+            'user_name' => 'John Doe',
+            'email' => 'johndoe@example.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('password123'),
+            'remember_token' => Str::random(10),
             'is_admin' => 1,
-            'user_name' => 'admin',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         DB::table('users')->insert([
-            'phone_number' => '0123456789',
-            'email' => 'example@example.com',
-            'password' => bcrypt('password'),
-            'is_admin' => 1,
-            'user_name' => 'admin',
+            'user_name' => 'Jane Smith',
+            'email' => 'janesmith@example.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('password456'),
+            'is_admin' => 0,
+            'remember_token' => Str::random(10),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

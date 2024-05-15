@@ -46,34 +46,61 @@
                 <th>Trạng thái</th>
                 <th>Giá</th>
                 <th>Danh mục</th>
-                <th>Mã Voucher</th>
+                <th>Mã người dùng</th>
                 <th>Mô tả sản phẩm</th>
                 <th>Thao tác</th>
             </tr>
         </thead>
         <tbody>
+            @foreach($products as $product)
             <tr>
-                <td>1</td>
-                <td><img class="img" src="{{ asset('img/logoChoNho.jpg') }}" alt="Ảnh sản phẩm"></td>
-                <td>Áo thun</td>
-                <td>10</td>
-                <td>Còn hàng</td>
-                <td>200.000 VND</td>
-                <td>Thời trang</td>
-                <td>V001</td>
-                <td>Mô tả sản phẩm</td>
+                <td>{{$product->product_id}}</td>
+                <td><img src="{{ asset('uploads/images/' . $product->product_photo) }}" alt="Ảnh sản phẩm" width="100"></td>
+                <td>{{$product->product_name}}</td>
+                <td>{{$product->quantity}}</td>
+                <td>{{$product->status}}</td>
+                <td>{{$product->price}}</td>
+                <td>{{$product->category->category_name}}</td>
+                <td>{{$product->user_id}}</td>
+                <td>{{$product->product_detail}}</td>
                 <td>
-                    <a class="edit-button" href="{{ route('user.editproduct') }}"><i class="fas fa-pencil-alt"></i></a>
-                    <a class="delete-button"><i class="fas fa-trash"></i></a>
+                    <a class="edit-button" href="{{ route('product.update', ['product' => $product->product_id]) }}"><i class="fas fa-pencil-alt"></i></a>
+                    <form action="{{ route('product.deleteProduct', ['id' => $product->product_id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="delete-button"><i class="fas fa-trash"></i></button>
+                    </form>
                 </td>
             </tr>
+            @endforeach
         </tbody>
     </table>
 
     <div class="main-buttons">
-        <a class="add-product-button" href="{{ route('user.addproduct') }}">Thêm sản phẩm</a>
+        <a class="add-product-button" href="{{ route('product.addProduct') }}">Thêm sản phẩm</a>
         <a class="add-voucher-button">Thêm voucher</a>
     </div>
+
+    <!-- Phân trang  -->
+    @if($numberOfPage > 1)
+    <div class="d-flex justify-content-center align-items-center my-2">
+        @if($pageIndex > 1)
+        <a class="btn btn-success" href="{{route('product.productManagement', ['pageIndex' => $pageIndex - 1])}}">Trước</a>
+        @endif
+        @for($i = 1; $i <= $numberOfPage; $i++) @if($i==$pageIndex) <a class="btn btn-primary ms-2" href="{{route('product.productManagement', ['pageIndex' => $i])}}">{{$i}}</a>
+            @else
+            @if($i == 1 || $i == $numberOfPage || ($i <= $pageIndex + 4 && $i>= $pageIndex - 4))
+                <a class="btn btn-success ms-2" href="{{route('product.productManagement', ['pageIndex' => $i])}}">{{$i}}</a>
+                @elseif($i == $pageIndex - 5 || $i == $pageIndex + 5)
+                <a class="btn btn-success ms-2" href="{{route('product.productManagement', ['pageIndex' => $i])}}">...</a>
+                @endif
+                @endif
+                @endfor
+                @if($pageIndex < $numberOfPage) <a class="btn btn-success ms-2" href="{{route('product.productManagement', ['pageIndex' => $pageIndex + 1])}}">Sau</a>
+                    @endif
+    </div>
+    @endif
+
 </main>
 
 <!-- Footer -->
