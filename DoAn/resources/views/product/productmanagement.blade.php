@@ -64,7 +64,7 @@
                 <td>{{$product->user_id}}</td>
                 <td>{{$product->product_detail}}</td>
                 <td>
-                    <a class="edit-button" href="{{ route('product.update', ['product' => $product->product_id]) }}"><i class="fas fa-pencil-alt"></i></a>
+                    <a class="edit-button" href="{{ route('product.update', ['product_id' => $product->product_id]) }}"><i class="fas fa-pencil-alt"></i></a>
                     <form action="{{ route('product.deleteProduct', ['id' => $product->product_id]) }}" method="POST">
                         @csrf
                         @method('DELETE')

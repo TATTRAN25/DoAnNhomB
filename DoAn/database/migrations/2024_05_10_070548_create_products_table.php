@@ -21,6 +21,8 @@ return new class extends Migration
             $table->decimal('price', 10, 2);
             $table->bigInteger('category_id')->unsigned();
             $table->foreign('category_id')->references('category_id')->on('categories')->onDelete('cascade');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

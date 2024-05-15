@@ -13,13 +13,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('productmanagement', [ProductController::class, 'productManagement'])->name('product.productManagement');
 
 Route::get('addproduct', [ProductController::class, 'addProduct'])->name('product.addProduct');
 Route::post('addproduct', [ProductController::class, 'store'])->name('product.store');
 
-Route::get('editproduct', [ProductController::class, 'editProduct'])->name('product.editProduct');
-Route::put('editproduct', [ProductController::class, 'updateProduct'])->name('product.update');
+Route::get('editproduct/{product_id}', [ProductController::class, 'editProduct'])->name('product.editProduct');
+Route::put('editproduct/{product_id}', [ProductController::class, 'update'])->name('product.update');
+
 
 Route::delete('deleteproduct/{id}', [ProductController::class, 'deleteProduct'])->name('product.deleteProduct');
 
