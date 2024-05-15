@@ -1,93 +1,114 @@
-@extends('dashboardcuatu')
+@extends('layout')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css\account.css') }}">
-<div class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3 side">
-                <table class="mx-auto mb-5 mt-3 py-auto">
-                    <tr>
-                        <td><img class="mt-2" width="75px" src="{{ asset('images\default.jpg') }}" alt="defaut"></td>
-                        <td>
-                            <p>Username</p>
-                            <p><a href=""><i class="fa-solid fa-pen-to-square edit"></i> Sửa hồ sơ</a></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa-solid fa-bag-shopping"></i></td>
-                        <td><a href="">Đơn mua</a></td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa-solid fa-bell"></i></td>
-                        <td><a href="">Thông báo</a></td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa-solid fa-pencil"></i></td>
-                        <td><a href="">Đăng ký mua hàng</a></td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa-brands fa-dropbox"></i></td>
-                        <td><a href="">Quản lý sản phẩm</a></td>
-                    </tr>
-                </table>
-                <div class="text-center">
-                    <h5>Tài khoản của tôi</h5>
+            <div class="col-xl-3" style="height: 100vh">
+                <div class="p-4 side-bar-info">
+                    <div class="d-flex">
+                        <img class="round-img" src="{{asset('images/user.jpg')}}" alt="User name">
+                        <div class="account-info">
+                            <h4 class="account-username">username</h4>
+                            <span class="account-edit"><i class="fa-regular fa-pen-to-square"></i> Sửa hồ sơ</span>
+                        </div>
+                     </div>
+
+                    <div class="info-option">
+                        <ul class="option-list">
+                            <li><a href="#" class="option-list-item"><i class="fa-regular fa-user" style="font-size: 22px; color: #333"></i> Tài khoản của tôi</a></li>
+                            <li><a href="#" class="option-list-item"><img src="{{asset('images/note.png')}}" style="width: 24px" alt=""> Đơn mua</a></li>
+                            <li><a href="#" class="option-list-item"><img src="{{asset('images/notice.png')}}" style="width: 22px" alt=""> Thông báo</a></li>
+                            <li><a href="#" class="option-list-item"><i class="fa-solid fa-bag-shopping" style="font-size: 24px; color: #333"></i> Bán hàng</a></li>
+                            <li><a href="#" class="option-list-item"><i class="fa-solid fa-list" style="font-size: 22px; color: #333"></i> Sản phẩm đang bán</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            
-            <div class="col-md-9 pt-5 main">
-                <h1 class="text-center">Hồ sơ của tôi</h1>
-                <table class="mx-auto">
-                    <tr>
-                        <td>Tên đăng nhập</td>
-                        <td>Username</td>
-                    </tr>
-                    <tr>
-                        <td>Tên</td>
-                        <td>Username</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>usernam@gmail.com</td>
-                        <td><a href="" class="btn1">Thay đổi</a></td>
-                    </tr>
-                    <tr>
-                        <td>Số điện thoại</td>
-                        <td>0123456789</td>
-                        <td><a href="" class="btn1">Hiện SĐT</a></td>
-                    </tr>
-                    <tr>
-                        <td>Giới tính</td>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Nam
-                                </label>
+
+            <div class="col-xl-9">
+                <div class="text-center info-profile">
+                    <h3>Hồ sơ của tôi</h3>
+                    <span>Quản lý thông tin hồ sơ để bảo mật tài khoản</span>
+                </div>
+
+                <div class="info-edit mt-4 d-flex justify-content-center">
+                    <form action="" method="POST" class="form-info">
+                        @csrf
+                        <div class="info-edit-group">
+                            <h4>Tên đăng nhập</h4>
+                            <span>username</span>
+                        </div>
+                        <div class="info-edit-group">
+                            <h4>Họ tên</h4>
+                            <input type="text" name="name" class="info-input-name">
+                        </div>
+                        <div class="info-edit-group">
+                            <h4>Email</h4>
+                            <span>username@gmail.com</span>
+                            <a href="#">Thay đổi</a>
+                        </div>
+                        <div class="info-edit-group">
+                            <h4>Số điện thoại</h4>
+                            <span>012345789</span>
+                            <a href="#">Thay đổi</a>
+                        </div>
+                        <div class="info-edit-group">
+                            <h4>Giới tính</h4>
+                            <div class="info-radio">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="radio1">male</label>
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="radio1" value="option1" checked>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label" for="radio2">female</label>
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="radio2" value="option2">
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label" for="radio3">other</label>
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="radio3" value="option3">
+                                </div>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    Nữ
-                                </label>
+                        </div>
+                        <div class="info-edit-group">
+                            <h4>Ngày sinh</h4>
+                            <div class="info-date">
+                                <div class="form-group">
+                                    <select class="form-control" id="ngay" name="ngay">
+                                        <option value="">Chọn ngày</option>
+                                        @for ($i = 1; $i <= 31; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" id="thang" name="month">
+                                        <option value="">Chọn tháng</option>
+                                        @for ($i = 1; $i <= 12; $i++)
+                                            <option value="{{ $i }}">Tháng {{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" id="nam" name="year">
+                                        <option value="">Chọn năm</option>
+                                        @php
+                                            $currentYear = date("Y");
+                                        @endphp
+                                        @for ($i = $currentYear; $i >= 1900; $i--)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
                             </div>
-                        </td>
-                        <td><a href="" class="btn1">Chỉnh sửa</a></td>
-                    </tr>
-                    <tr>
-                        <td>Ngày sinh</td>
-                        <td>28/3/2024</td>
-                    </tr>
-                    <tr>
-                        <td>Tài khoản ngân hàng</td>
-                        <td>Chưa liên kết</td>
-                        <td><a href="" class="btn1">Liên kết</a></td>
-                    </tr>
-                </table>
-                <a href="" class="btn-save">Lưu</a>
+                        </div>
+                        <div class="info-edit-group">
+                            <h4>Hình ảnh</h4>
+                            <input type="file" name="image">
+                        </div>
+                        <button type="submit" class="btn btn-success">Lưu</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
