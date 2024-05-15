@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('login', [CrudUserController::class, 'login'])->name('login');
 Route::post('login', [CrudUserController::class, 'authUser'])->name('auth.user');
 
+Route::get('register', [CrudUserController::class, 'register'])->name('register');
+Route::post('register', [CrudUserController::class, 'postRegister'])->name('post.register');
+
+
 Route::get('/', function () {
     return view('welcome');
 });
