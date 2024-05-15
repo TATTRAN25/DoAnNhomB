@@ -15,11 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('login', [CrudUserController::class, 'login'])->name('login');
+<<<<<<< HEAD
 Route::post('login', [CrudUserController::class, 'authUser'])->name('auth.user');
 
 Route::get('register', [CrudUserController::class, 'register'])->name('register');
 Route::post('register', [CrudUserController::class, 'postRegister'])->name('post.register');
 
+=======
+Route::get('account', [CrudUserController::class, 'viewAccountInfo'])->name('account');
+>>>>>>> laravel-10x/2.2-account
 
 Route::get('/', function () {
     return view('welcome');

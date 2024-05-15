@@ -71,4 +71,9 @@ class CrudUserController extends Controller
 
         return redirect('login')->with('message', 'Register successfully');
     }
+
+    public function viewAccountInfo()
+    {
+        return view('crud.account');
+    }
 }
