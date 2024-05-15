@@ -15,7 +15,7 @@
     position: relative;
     text-align: center;
   }
-  
+
   .hr-lines:before{
     content:" ";
     height: 1px;
@@ -26,7 +26,7 @@
     top: 50%;
     left: 0;
   }
-  
+
   .hr-lines:after{
     content:" ";
     height: 1px;
@@ -38,8 +38,8 @@
     right: 0;
   }
 
-  input[type=number]::-webkit-inner-spin-button, 
-  input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none; 
-    margin: 0; 
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }

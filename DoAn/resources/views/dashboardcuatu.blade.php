@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
 </head>
 <body>
-    
+
     <!--HEADER-->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -40,7 +40,7 @@
     <!--CONTENT-->
 
     <!--FOOTER-->
-    <footer class="py-3 position-fixed bottom-0">
+    <footer class="py-3 mt-3">
       <div class="container">
         <div class="row">
           <div class="col"></div>
