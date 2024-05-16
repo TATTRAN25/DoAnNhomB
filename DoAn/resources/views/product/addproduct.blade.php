@@ -43,10 +43,9 @@
                 <!-- Trạng thái -->
                 <div class="form-group">
                     <label for="status">Trạng thái:</label>
-                    <!-- <input type="text" id="status" name="status" required autofocus> -->
-                    <select id="status" name="status">
-                        <option value="Còn hàng" >Còn hàng</option>
-                        <option value="Hết hàng" >Hết hàng</option>
+                    <select id="status" name="status" disabled>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
                     </select>
                     @error('status')
                     <span class="text-danger">{{ $message }}</span>
@@ -63,7 +62,7 @@
                 <!-- Mô tả -->
                 <div class="form-group">
                     <label for="product_detail">Mô tả:</label>
-                     <textarea id="product_detail" name="product_detail" required autofocus></textarea>
+                    <textarea id="product_detail" name="product_detail" required autofocus></textarea>
                     @error('product_detail')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -109,5 +108,15 @@
         }
         reader.readAsDataURL(event.target.files[0]);
     }
+
+    document.getElementById('quantity').addEventListener('input', function() {
+        var quantity = document.getElementById('quantity').value;
+        var status = document.getElementById('status');
+        if (quantity > 0) {
+            status.value = 'Active';
+        } else {
+            status.value = 'Inactive';
+        }
+    });
 </script>
 @endsection

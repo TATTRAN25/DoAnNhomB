@@ -41,7 +41,7 @@ class ProductController extends Controller
             'product_photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'product_detail' => 'required',
             'quantity' => 'required|numeric',
-            'status' => 'required',
+            // 'status' => 'required',
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,category_id',
             'user_id' => 'required|exists:users,user_id',
@@ -53,13 +53,18 @@ class ProductController extends Controller
             $filename = time() . '.' . $extension;
             $file->move('uploads/images/', $filename);
             $data = $request->all();
+        } else {
+            return back()->with('error', 'Image upload failed.');
         }
+        // Thêm điều kiện cho status
+        $status = $request->quantity > 0 ? 'Active' : 'Inactive';
 
         $check = Product::create([
             'product_name' => $data['product_name'],
             'product_detail' => $data['product_detail'],
             'quantity' => $data['quantity'],
-            'status' => $data['status'],
+            'status' => $status,
+            // 'status' => $data['status'],
             'price' => $data['price'],
             'category_id' => $data['category_id'],
             'user_id' => $data['user_id'],
@@ -72,7 +77,6 @@ class ProductController extends Controller
     public function editProduct(Request $request, $product_id)
     {
         $pageIndex = $request->input('pageIndex', 1);
-        // $product = Product::find($product_id);
         $product = Product::findOrFail($product_id);
         $users = User::all();
 
@@ -92,17 +96,19 @@ class ProductController extends Controller
             'product_photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'product_detail' => 'required',
             'quantity' => 'required|numeric',
-            'status' => 'required',
+            // 'status' => 'required',
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,category_id',
             'user_id' => 'required|exists:users,user_id',
         ]);
+        $status = $request->quantity > 0 ? 'Active' : 'Inactive';
 
         $product = Product::find($input['product_id']);
         $product->product_name = $input['product_name'];
         $product->product_detail = $input['product_detail'];
         $product->quantity = $input['quantity'];
-        $product->status = $input['status'];
+        // $product->status = $input['status'];
+        $product->$status;
         $product->price = $input['price'];
         $product->category_id = $input['category_id'];
         $product->user_id = $input['user_id'];
@@ -136,5 +142,40 @@ class ProductController extends Controller
     public function detailProduct()
     {
         return view('product.detailproduct');
+    }
+
+    public function filterProducts(Request $request)
+    {
+        $query = Product::query();
+
+        if ($request->category_id && $request->category_id != 'all') {
+            $query->where('category_id', $request->category_id);
+        }
+
+        if ($request->price && $request->price != 'all') {
+            switch ($request->price) {
+                case 'duoi_100k':
+                    $query->where('price', '<', 100000);
+                    break;
+                case 'giua_100_500k':
+                    $query->whereBetween('price', [100000, 500000]);
+                    break;
+                case 'tren_500k':
+                    $query->where('price', '>', 500000);
+                    break;
+            }
+        }
+
+        if ($request->status && $request->status != 'all') {
+            $query->where('status', $request->status);
+        }
+
+        $filteredProducts = $query->get();
+
+        return view('product.productmanagement', [
+            'products' => $filteredProducts,
+            'numberOfPage' => 1,
+            'pageIndex' => 1
+        ]);
     }
 }

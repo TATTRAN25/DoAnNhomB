@@ -5,7 +5,6 @@
 <!-- Main -->
 <main>
     <div class="container">
-
         <div class="content">
             <h1>Sửa Sản Phẩm</h1>
             <form action="{{ route('product.update', ['product_id' => $product->product_id]) }}" method="POST" enctype="multipart/form-data">
@@ -30,8 +29,8 @@
                 <div>
                     <label for="status">Trạng thái:</label>
                     <select id="status" name="status">
-                        <option value="Còn hàng" {{$product->status == 'Còn hàng' ? 'selected' : ''}}>Còn hàng</option>
-                        <option value="Hết hàng" {{$product->status == 'Hết hàng' ? 'selected' : ''}}>Hết hàng</option>
+                        <option value="Active" {{$product->status == 'Active' ? 'selected' : ''}} {{ $product->quantity <= 0 ? 'disabled' : '' }}>Active</option>
+                        <option value="Inactive" {{$product->status == 'Inactive' ? 'selected' : ''}} {{ $product->quantity <= 0 ? 'disabled' : '' }}>Inactive</option>
                     </select>
                 </div>
                 <!-- Giá -->
@@ -73,5 +72,17 @@
 
     </div>
 </main>
+
+<script>
+    document.getElementById('quantity').addEventListener('input', function() {
+        var quantity = document.getElementById('quantity').value;
+        var status = document.getElementById('status');
+        if (quantity > 0) {
+            status.value = 'Active';
+        } else {
+            status.value = 'Inactive';
+        }
+    });
+</script>
 
 @endsection

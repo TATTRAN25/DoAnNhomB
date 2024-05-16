@@ -1,40 +1,45 @@
 @extends('layout')
 
 @section('title', 'Checkout')
+
 @section('content')
 <!-- Main -->
 <main>
     <h1>Danh sách sản phẩm</h1>
-
-    <div class="filter">
-        <h3>Bộ lọc</h3>
-        <div class="filter-item">
-            <label for="category">Danh mục:</label>
-            <select id="category">
-                <option value="all">Tất cả</option>
-                <option value="clothing">Quần áo</option>
-                <option value="electronics">Đồ điện tử</option>
-                <option value="books">Sách</option>
-            </select>
+    <form action="{{ route('filter.products') }}" method="POST">
+        @csrf
+        <div class="filter">
+            <h3>Bộ lọc</h3>
+            <div class="filter-item">
+                <label for="category_id">Danh mục:</label>
+                <select id="category_id" name="category_id">
+                    <option value="all">Tất cả</option>
+                    @foreach($products->unique('category_id') as $product)
+                    <option value="{{ $product->category_id }}">{{ $product->category->category_name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="filter-item">
+                <label for="price">Giá:</label>
+                <select id="price" name="price">
+                    <option value="all">Tất cả</option>
+                    <option value="duoi_100k">Dưới 100.000 VND</option>
+                    <option value="giua_100_500k">Từ 100.000 - 500.000 VND</option>
+                    <option value="tren_500k">Trên 500.000 VND</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label for="status">Trạng thái:</label>
+                <select id="status" name="status">
+                    <option value="all">Tất cả</option>
+                    @foreach($products->unique('status') as $product)
+                    <option value="{{ $product->status }}">{{ $product->status }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <button class="filter-button" type="submit">Lọc sản phẩm</button>
         </div>
-        <div class="filter-item">
-            <label for="price">Giá:</label>
-            <select id="price">
-                <option value="all">Tất cả</option>
-                <option value="low">Dưới 100.000 VND</option>
-                <option value="medium">Từ 100.000 - 500.000 VND</option>
-                <option value="high">Trên 500.000 VND</option>
-            </select>
-        </div>
-        <div class="filter-item">
-            <label for="popularity">Độ phổ biến:</label>
-            <select id="popularity">
-                <option value="all">Tất cả</option>
-                <option value="popular">Phổ biến</option>
-                <option value="not-popular">Không phổ biến</option>
-            </select>
-        </div>
-    </div>
+    </form>
 
     <table>
         <thead>
@@ -52,20 +57,20 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($products as $product)
+            @foreach($filteredProducts ?? $products as $product)
             <tr>
                 <td>{{$product->product_id}}</td>
                 <td><img src="{{ asset('uploads/images/' . $product->product_photo) }}" alt="Ảnh sản phẩm" width="100"></td>
                 <td>{{$product->product_name}}</td>
                 <td>{{$product->quantity}}</td>
                 <td>{{$product->status}}</td>
-                <td>{{$product->price}}</td>
+                <td>{{ number_format($product->price, 0, ',', '.') }} VND</td>
                 <td>{{$product->category->category_name}}</td>
                 <td>{{$product->user_id}}</td>
                 <td>{{$product->product_detail}}</td>
                 <td>
                     <a class="edit-button" href="{{ route('product.update', ['product_id' => $product->product_id]) }}"><i class="fas fa-pencil-alt"></i></a>
-                    <form action="{{ route('product.deleteProduct', ['id' => $product->product_id]) }}" method="POST">
+                    <form action="{{ route('product.deleteProduct', ['id' => $product->product_id]) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="delete-button"><i class="fas fa-trash"></i></button>
@@ -78,7 +83,7 @@
 
     <div class="main-buttons">
         <a class="add-product-button" href="{{ route('product.addProduct') }}">Thêm sản phẩm</a>
-        <a class="add-voucher-button">Thêm voucher</a>
+        <a class="add-voucher-button" href="#">Thêm voucher</a>
     </div>
 
     <!-- Phân trang  -->
