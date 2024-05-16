@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function productManagement(Request $request)
     {
         $numberOfRecord = Product::count();
-        $perPage = 10;
+        $perPage = 5;
         $numberOfPage = $numberOfRecord % $perPage == 0 ?
             (int) ($numberOfRecord / $perPage) : (int) ($numberOfRecord / $perPage) + 1;
         $pageIndex = $request->input('pageIndex', 1);
