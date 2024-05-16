@@ -14,16 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('login', [CrudUserController::class, 'login'])->name('login');
-<<<<<<< HEAD
-Route::post('login', [CrudUserController::class, 'authUser'])->name('auth.user');
-
-Route::get('register', [CrudUserController::class, 'register'])->name('register');
-Route::post('register', [CrudUserController::class, 'postRegister'])->name('post.register');
-
-=======
-Route::get('account', [CrudUserController::class, 'viewAccountInfo'])->name('account');
->>>>>>> laravel-10x/2.2-account
+Route::controller(CrudUserController::class)->group(function() {
+    Route::get('/login', 'login')->name('login');
+    Route::post('/login', 'authUser')->name('auth.user');
+    Route::get('/register', 'register')->name('register');
+    Route::post('/register', 'postRegister')->name('post.register');
+    Route::get('/logout', 'logout')->name('logout');
+    Route::get('/account', 'viewAccountInfo')->name('account');
+});
 
 Route::get('/', function () {
     return view('welcome');

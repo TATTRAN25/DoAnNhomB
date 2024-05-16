@@ -23,7 +23,7 @@
                     </div>
                 </form>
                 <h3 class="hr-lines my-3">Hoặc</h3>
-                <div class="text-center">Bạn chưa có tài khoản? <a class="text-decoration-none" href="#">Đăng ký</a></div>
+                <div class="text-center">Bạn chưa có tài khoản? <a class="text-decoration-none" href="{{ route('register') }}">Đăng ký</a></div>
             </div>
         </div>
     </div>

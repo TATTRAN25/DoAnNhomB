@@ -20,15 +20,14 @@ class CrudUserController extends Controller
     public function authUser(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required'
         ]);
 
         $credentals = $request->only('email', 'password');
 
-
         if (Auth::attempt($credentals)) {
-            return redirect('')->withSuccess("Login successfully :)");
+            return redirect('account')->withSuccess("Login successfully :)");
         }
 
         return redirect('login')->withSuccess("Login failed :(");
@@ -57,7 +56,9 @@ class CrudUserController extends Controller
         $user = User::create([
             'user_name' => $data['user_name'],
             'email' => $data['email'],
+            'email_verified_at' => time(),
             'password' => Hash::make($data['password']),
+
         ]);
 
         $profile = UserDetail::create([
@@ -70,6 +71,14 @@ class CrudUserController extends Controller
         ]);
 
         return redirect('login')->with('message', 'Register successfully');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        Session::flush();
+
+        return redirect('login');
     }
 
     public function viewAccountInfo()

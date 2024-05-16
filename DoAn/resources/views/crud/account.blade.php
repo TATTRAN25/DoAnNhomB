@@ -6,7 +6,7 @@
             <div class="col-xl-3" style="height: 100vh">
                 <div class="p-4 side-bar-info">
                     <div class="d-flex">
-                        <img class="round-img" src="{{asset('images/user.jpg')}}" alt="User name">
+                        <img class="round-img" src="{{asset('images/default.jpg')}}" alt="User name">
                         <div class="account-info">
                             <h4 class="account-username">username</h4>
                             <span class="account-edit"><i class="fa-regular fa-pen-to-square"></i> Sửa hồ sơ</span>

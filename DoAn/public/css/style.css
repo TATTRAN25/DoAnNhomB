@@ -15,10 +15,6 @@ body {
     height: 96px;
     background-color: #12b886;
     width: 100%;
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
 }
 
 .nav-prefix {
@@ -254,6 +250,7 @@ footer {
     color: #fff;
     padding: 40px 0;
     text-align: center;
+    margin-top: 3rem;
 }
 
 /* Phần footer-container */

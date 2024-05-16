@@ -12,10 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-<<<<<<<< HEAD:DoAn/database/migrations/2024_05_13_053615_create_users_table.php
 
-========
->>>>>>>> laravel-10x/2.2-account:DoAn/database/migrations/2024_05_10_065958_create_users_table.php
             $table->bigIncrements('user_id');
             $table->string('user_name', 100);
             $table->string('email', 255)->unique();
