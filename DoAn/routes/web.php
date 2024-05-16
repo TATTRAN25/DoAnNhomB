@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CrudUserController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +28,4 @@ Route::controller(CrudUserController::class)->group(function() {
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/home', [ProductController::class, 'home'])->name('home');
