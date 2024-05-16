@@ -10,7 +10,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
 
-class ProductController extends Controller
+class CrudProductController extends Controller
 {
     public function productManagement(Request $request)
     {
