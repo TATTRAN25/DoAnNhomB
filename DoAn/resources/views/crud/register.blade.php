@@ -10,72 +10,30 @@
                 </div>
                 <div class="col-md-5 ms-1 me-auto border border-dark rounded">
                     <h2 class="text-center">Đăng ký</h2>
-                    <form action="{{ route('post.register') }}" method="post">
+                    <form action="{{ route('post.register') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="input-group mb-3">
                             <input type="text" name="user_name" id="user_name" placeholder="Nhập tài khoản" class="form-control" required autofocus>
-                            @if ($errors->has('user_name'))
-                                <div class="alert alert-danger">
-                                    @foreach ($errors->all() as $error)
-                                        <div>{{ $error }}</div>
-                                    @endforeacH
-                                </div>
-                            @endif
                         </div>
 
                         <div class="input-group mb-3">
                             <input type="password" name="password" id="password" placeholder="Nhập mật khẩu" class="form-control" required autofocus>
-                            @if ($errors->has('password'))
-                                <div class="alert alert-danger">
-                                    @foreach ($errors->all() as $error)
-                                        <div>{{ $error }}</div>
-                                    @endforeacH
-                                </div>
-                            @endif
                         </div>
 
                         <div class="input-group mb-3">
                             <input type="password" name="retype" id="retype" placeholder="Nhập lại mật khẩu" class="form-control" required autofocus>
-                            @if ($errors->has('retype'))
-                                <div class="alert alert-danger">
-                                    @foreach ($errors->all() as $error)
-                                        <div>{{ $error }}</div>
-                                    @endforeacH
-                                </div>
-                            @endif
                         </div>
 
                         <div class="input-group mb-3">
                             <input type="text" name="full_name" id="full_name" placeholder="Nhập họ và tên" class="form-control" required autofocus>
-                            @if ($errors->has('full_name'))
-                                <div class="alert alert-danger">
-                                    @foreach ($errors->all() as $error)
-                                        <div>{{ $error }}</div>
-                                    @endforeach
-                                </div>
-                            @endif
                         </div>
 
                         <div class="input-group mb-3">
                             <input type="number" name="phone_number" id="phone_number" placeholder="Nhập số điện thoại" class="form-control" autofocus>
-                            @if ($errors->has('phone_number'))
-                                <div class="alert alert-danger">
-                                    @foreach ($errors->all() as $error)
-                                        <div>{{ $error }}</div>
-                                    @endforeach
-                                </div>
-                            @endif
                         </div>
 
                         <div class="input-group mb-3">
                             <input type="email" name="email" id="email" placeholder="Nhập email"  class="form-control" required autofocus>
-                            @if ($errors->has('email'))
-                                <div class="alert alert-danger">
-                                    @foreach ($errors->all() as $error)
-                                        <div>{{ $error }}</div>
-                                    @endforeach
-                                </div>
-                            @endif
                         </div>
 
                         <div class="input-group mb-3">
@@ -87,24 +45,10 @@
 
                         <div class="input-group mb-3">
                             <input type="date" name="date_of_birth" id="date_of_birth" class="form-control" required>
-                            @if ($errors->has('date_of_birth'))
-                                <div class="alert alert-danger">
-                                    @foreach ($errors->all() as $error)
-                                        <div>{{ $error }}</div>
-                                    @endforeach
-                                </div>
-                            @endif
                         </div>
 
                         <div class="input-group mb-3">
                             <input type="file" name="user_image" id="user_image" class="form-control" required>
-                            @if ($errors->has('user_image'))
-                                <div class="alert alert-danger">
-                                @foreach ($errors->all() as $error)
-                                    <div>{{ $error }}</div>
-                                @endforeach
-                                </div>
-                            @endif
                         </div>
 
                         <div class="d-grid mx-auto">

@@ -6,16 +6,10 @@
 
         <div class="nav-menu-prefix">
             <ul class="nav-list-prefix">
-                @guest
-                <li class="nav-item-prefix"><a href="{{ route('login') }}" class="nav-link-prefix">Đăng nhập</a></li>
-                <li class="nav-item-prefix"><a href="{{ route('register') }}" class="nav-link-prefix">| Đăng ký</a></li>
-                @else
-                <li class="nav-item-prefix"><a href="#" class="nav-link-prefix">Trang chủ </a></li>
-                <li class="nav-item-prefix"><a href="{{ route('logout') }}" class="nav-link-prefix">| Đăng xuất</a></li>
+                <li class="nav-item-prefix"><a href="#" class="nav-link-prefix">Trang chủ</a></li>
                 <li class="nav-item-prefix"><a href="#" class="nav-link-prefix">Sản phẩm</a></li>
                 <li class="nav-item-prefix"><a href="#" class="nav-link-prefix">Tiện ích</a></li>
                 <li class="nav-item-prefix"><a href="#" class="nav-link-prefix">Liên hệ</a></li>
-                @endguest
             </ul>
         </div>
 
@@ -27,7 +21,7 @@
         </div>
 
         <div class="nav-user-action-prefix">
-            <a href=""><i class="user-icon fa-solid fa-user"></i></a>
+            <a href="{{ route('account') }}"><i class="user-icon fa-solid fa-user"></i></a>
             <a href=""><i class="cart-icon fa-solid fa-cart-shopping"></i></i></a>
         </div>
     </nav>

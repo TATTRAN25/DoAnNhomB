@@ -20,6 +20,10 @@
                             <li><a href="#" class="option-list-item"><img src="{{asset('images/notice.png')}}" style="width: 22px" alt=""> Thông báo</a></li>
                             <li><a href="#" class="option-list-item"><i class="fa-solid fa-bag-shopping" style="font-size: 24px; color: #333"></i> Bán hàng</a></li>
                             <li><a href="#" class="option-list-item"><i class="fa-solid fa-list" style="font-size: 22px; color: #333"></i> Sản phẩm đang bán</a></li>
+                            @if(session('user')[0] == 1)
+                            <li><a href="{{ route('user.list') }}" class="option-list-item"><i class="fa-solid fa-hand-holding-droplet" style="font-size: 22px; color: #333"></i>Phân quyền</a></li>
+                            @endif
+                            <li><a href="{{ route('logout') }}" class="option-list-item"><i class="fa-solid fa-arrow-right-from-bracket" style="font-size: 22px; color: #333"></i>Đăng xuất</a></li>
                         </ul>
                     </div>
                 </div>

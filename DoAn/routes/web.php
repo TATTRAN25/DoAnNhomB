@@ -21,6 +21,7 @@ Route::controller(CrudUserController::class)->group(function() {
     Route::post('/register', 'postRegister')->name('post.register');
     Route::get('/logout', 'logout')->name('logout');
     Route::get('/account', 'viewAccountInfo')->name('account');
+    Route::get('/list_user', 'listUser')->name('user.list');
 });
 
 Route::get('/', function () {

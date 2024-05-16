@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Str;
 use function Laravel\Prompts\table;
 
 class UserSeeder extends Seeder
@@ -19,9 +19,12 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'user_name' => 'admin123',
             'email' => 'admin123@gmail.com',
-            'email_verified_at' => time(),
+            'email_verified_at' => date_create(datetime:now()),
             'password' => Hash::make('123456'),
             'is_admin' => '1',
+            'remember_token' => Str::random(10),
+            'created_at' => date_create(datetime:now()),
+            'updated_at' => date_create(datetime:now())
         ]);
     }
 }

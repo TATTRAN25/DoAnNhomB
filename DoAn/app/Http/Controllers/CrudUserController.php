@@ -9,6 +9,7 @@ use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Profiler\Profile;
+use Illuminate\Support\Str;
 
 class CrudUserController extends Controller
 {
@@ -27,10 +28,11 @@ class CrudUserController extends Controller
         $credentals = $request->only('email', 'password');
 
         if (Auth::attempt($credentals)) {
-            return redirect('account')->withSuccess("Login successfully :)");
+            Session::push('user', Auth::user()['is_admin']);
+            return redirect()->intended('account')->with('success',"Login successfully :)");
         }
 
-        return redirect('login')->withSuccess("Login failed :(");
+        return redirect('login')->with('success', "Login failed :(");
     }
 
     public function register()
@@ -53,12 +55,19 @@ class CrudUserController extends Controller
 
         $data = $request->all();
 
+        $fileName = "";
+        if ($request->hasFile('user_image')) {
+            $file = $request->file('user_image');
+            $fileName = $file->getFilename() . "." . $file->extension();
+            $file->move('upload/', $fileName);
+        }
+
         $user = User::create([
             'user_name' => $data['user_name'],
             'email' => $data['email'],
-            'email_verified_at' => time(),
+            'email_verified_at' => date_create(datetime:now()),
             'password' => Hash::make($data['password']),
-
+            'remember_token' => Str::random(10)
         ]);
 
         $profile = UserDetail::create([
@@ -66,7 +75,7 @@ class CrudUserController extends Controller
             'phone_number' => $data['phone_number'],
             'date_of_birth' => $data['date_of_birth'],
             'sex' => $data['sex'],
-            'user_image' => $data['user_image'],
+            'user_image' => $fileName,
             'full_name' => $data['full_name']
         ]);
 
@@ -83,6 +92,17 @@ class CrudUserController extends Controller
 
     public function viewAccountInfo()
     {
-        return view('crud.account');
+        if (isset(session('user')[0])) {
+            return view('crud.account');
+        }
+        return redirect('login');
+    }
+
+    public function listUser()
+    {
+        if (isset(session('user')[0])) {
+            $users = User::all();
+            return view('crud.list_user', ['users' => $users]);
+        }
     }
 }
