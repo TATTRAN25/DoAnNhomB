@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CrudUserController;
+use App\Http\Controllers\CheckoutController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('login', [CrudUserController::class, 'login'])->name('login');
 Route::get('account', [CrudUserController::class, 'viewAccountInfo'])->name('account');
+
+Route::get('order-history', [CheckoutController::class, 'showOrderHistory'])->name('orders.history');
 
 Route::get('/', function () {
     return view('welcome');

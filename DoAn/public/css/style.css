@@ -16,6 +16,7 @@ body {
     background-color: #12b886;
     width: 100%;
     position: sticky;
+    z-index: 1000;
     top: 0;
     left: 0;
     right: 0;
@@ -243,8 +244,27 @@ body {
     border-radius: 9px;
 }
 
-.btn-purchase:hover {
+.btn-order {
+    background-color: #c0eb75;
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    border-radius: 9px;
+    text-decoration: none;
+}
+
+.btn-order:hover {
     opacity: 0.9;
+}
+
+.product-title {
+    font-size: 16px;
+    font-family: "Rubik", sans-serif;
+    font-weight: 400;
 }
 
 /* Phần footer chính */
@@ -290,6 +310,22 @@ footer {
 
 .nav-footer-right {
     list-style: none;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    margin-bottom: auto;
 }
 
 /* Màu chữ khi di chuột qua liên kết */
@@ -394,7 +430,6 @@ textarea:focus {
 
 .price-container .price-info {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     margin-bottom: 12px;
 }
@@ -419,7 +454,7 @@ textarea:focus {
 }
 
 .home-img {
-    background-image: url("../images/b18.jpg");
+    background-image: url("../images/products/b18.jpg");
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -468,4 +503,32 @@ textarea:focus {
 
 .call-info {
     margin: 48px 0;
+}
+
+.heading-sub {
+    color: #35dfac;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.list-group-item:hover {
+    background-color: #f1f3f5;
+    cursor: pointer;
+}
+
+.list-item-info .info-name {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1.1px;
+}
+
+.list-item-info .info-price {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.1px;
+}
+
+.list-group-result {
+    max-height: 300px;
+    overflow-y: auto;
 }
