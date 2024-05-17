@@ -189,9 +189,9 @@
         var quantity = document.getElementById('quantity').value;
         var status = document.getElementById('status');
         if (quantity > 0) {
-            status.value = 'Active';
+            status.value = 'active';
         } else {
-            status.value = 'Inactive';
+            status.value = 'inactive';
         }
     });
 </script>
