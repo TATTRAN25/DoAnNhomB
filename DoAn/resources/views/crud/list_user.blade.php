@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <table class="mx-auto">
+                    <table class="mx-auto table table-striped">
                         <tr>
                             <th>#</th>
                             <th>Username</th>
