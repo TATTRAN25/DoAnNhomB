@@ -23,9 +23,14 @@ Route::controller(CrudUserController::class)->group(function() {
     Route::get('/logout', 'logout')->name('logout');
     Route::get('/account', 'viewAccountInfo')->name('account');
     Route::get('/list_user', 'listUser')->name('user.list');
+    Route::get('/role', 'switchRole')->name('role');
 });
+
+
+
+Route::get('/home', [ProductController::class, 'home'])->name('home');
 
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home', [ProductController::class, 'home'])->name('home');
+

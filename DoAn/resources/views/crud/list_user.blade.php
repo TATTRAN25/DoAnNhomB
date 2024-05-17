@@ -1,32 +1,39 @@
 @extends('layout')
 
 @section('content')
-    <div class="list-user">]
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+    </style>
+    <div class="list-user mt-5">
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <table class="table">
+                    <table class="mx-auto">
                         <tr>
                             <th>#</th>
                             <th>Username</th>
                             <th>Email</th>
-                            <th>Họ tên</th>
-                            <th>Ngày sinh</th>
                             <th>Quyền hạn</th>
                         </tr>
                         @foreach ($users as $user)
-                            <tr>
-                                <td>{{ $user->id }}</td>
-                                <td>{{ $user->user_name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->userdetail->full_name }}</td>
-                                <td>{{ $user->userdetail->date_of_birth }}</td>
-                                @if ($user->is_admin == 1)
-                                    <td>Admin</td>
-                                @else
-                                    <td>User</td>
-                                @endif
-                            </tr>
+                            @if ($user->user_id != session('user_id')[0])
+                                <tr>
+                                    <td>{{ $user->user_id }}</td>
+                                    <td>{{ $user->user_name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    @if ($user->is_admin == 1)
+                                        <td><a href="{{ route('role', ['id' => $user->user_id]) }}" style="text-decoration: none; color:black">Admin</a></td>
+                                    @else
+                                        <td><a href="{{ route('role', ['id' => $user->user_id]) }}" style="text-decoration: none; color:black">User</a></td>
+                                    @endif
+                                </tr>
+                            @endif
                         @endforeach
                     </table>
                 </div>

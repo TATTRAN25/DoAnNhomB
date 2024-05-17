@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use Illuminate\Support\Str;
 
+
 class CrudUserController extends Controller
 {
     public function login()
@@ -27,9 +28,11 @@ class CrudUserController extends Controller
 
         $credentals = $request->only('email', 'password');
 
-        if (Auth::attempt($credentals)) {
+        if (Auth::attempt($credentals) && !session('user')) {
             Session::push('user', Auth::user()['is_admin']);
-            return redirect()->intended('account')->with('success',"Login successfully :)");
+            Session::push('user_id', Auth::user()['user_id']);
+            Session::push('user_name', Auth::user()['user_name']);
+            return redirect()->intended('home')->with('success', "Login successfully :)");
         }
 
         return redirect('login')->with('success', "Login failed :(");
@@ -50,7 +53,7 @@ class CrudUserController extends Controller
             'phone_number' => 'nullable',
             'email' => 'required|email|max:255|unique:users',
             'date_of_birth' => 'required',
-            'user_image' => 'required|max:100'
+            'user_image' => 'required|image'
         ]);
 
         $data = $request->all();
@@ -59,19 +62,19 @@ class CrudUserController extends Controller
         if ($request->hasFile('user_image')) {
             $file = $request->file('user_image');
             $fileName = $file->getFilename() . "." . $file->extension();
-            $file->move('upload/', $fileName);
+            $file->move('upload/avatars/', $fileName);
         }
 
         $user = User::create([
             'user_name' => $data['user_name'],
             'email' => $data['email'],
-            'email_verified_at' => date_create(datetime:now()),
+            'email_verified_at' => date_create(datetime: now()),
             'password' => Hash::make($data['password']),
             'remember_token' => Str::random(10)
         ]);
 
         $profile = UserDetail::create([
-            'user_id' => $user['id'],
+            'user_id' => $user['user_id'],
             'phone_number' => $data['phone_number'],
             'date_of_birth' => $data['date_of_birth'],
             'sex' => $data['sex'],
@@ -100,9 +103,24 @@ class CrudUserController extends Controller
 
     public function listUser()
     {
-        if (isset(session('user')[0])) {
+        if (isset(session('user')[0]) && session('user')[0] == 1) {
             $users = User::all();
             return view('crud.list_user', ['users' => $users]);
         }
+        return redirect('home');
+    }
+
+    public function switchRole(Request $request)
+    {
+        $user_id = $request->get('id');
+        $user = User::find($user_id);
+
+        if ($user->is_admin == 1) {
+            $user->is_admin = 0;
+        } else {
+            $user->is_admin = 1;
+        }
+        $user->save();
+        return redirect()->back();
     }
 }

@@ -8,7 +8,7 @@
                     <div class="d-flex">
                         <img class="round-img" src="{{asset('images/default.jpg')}}" alt="User name">
                         <div class="account-info">
-                            <h4 class="account-username">username</h4>
+                            <h4 class="account-username">{{session('user_name')[0]}}</h4>
                             <span class="account-edit"><i class="fa-regular fa-pen-to-square"></i> Sửa hồ sơ</span>
                         </div>
                      </div>
@@ -19,7 +19,7 @@
                             <li><a href="#" class="option-list-item"><img src="{{asset('images/note.png')}}" style="width: 24px" alt=""> Đơn mua</a></li>
                             <li><a href="#" class="option-list-item"><img src="{{asset('images/notice.png')}}" style="width: 22px" alt=""> Thông báo</a></li>
                             <li><a href="#" class="option-list-item"><i class="fa-solid fa-bag-shopping" style="font-size: 24px; color: #333"></i> Bán hàng</a></li>
-                            <li><a href="#" class="option-list-item"><i class="fa-solid fa-list" style="font-size: 22px; color: #333"></i> Sản phẩm đang bán</a></li>
+                            <li><a href="#" class="option-list-item"><i class="fa-solid fa-list" style="font-size: 22px; color: #333"></i>Sản phẩm đang bán</a></li>
                             @if(session('user')[0] == 1)
                             <li><a href="{{ route('user.list') }}" class="option-list-item"><i class="fa-solid fa-hand-holding-droplet" style="font-size: 22px; color: #333"></i>Phân quyền</a></li>
                             @endif
@@ -40,7 +40,7 @@
                         @csrf
                         <div class="info-edit-group">
                             <h4>Tên đăng nhập</h4>
-                            <span>username</span>
+                            <span>{{session('user_name')[0]}}</span>
                         </div>
                         <div class="info-edit-group">
                             <h4>Họ tên</h4>
