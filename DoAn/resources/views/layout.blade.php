@@ -233,8 +233,7 @@
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error);
-                    // Display user-friendly error message here, e.g., using an alert or modal
-                    alert('An error occurred while processing your purchase. Please try again later.');
+                    alert('Có lỗi xảy ra khi mua hàng, vui lòng mua lại');
                 }
             });
         });
