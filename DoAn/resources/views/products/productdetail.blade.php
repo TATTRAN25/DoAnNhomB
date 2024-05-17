@@ -36,25 +36,32 @@
                     </p>
                     
                     <p class="product-category">Danh mục sản phẩm: <span>{{$product->category->category_name}}</span></p>
-                    <p class="product-voucher">Voucher của sản phẩm: <span style="color: #35dfac; font-size: 18px;">{{$product->voucher->voucher_name}}</span></p>
-
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-secondary" type="button" id="btn-minus"><i class="fas fa-minus"></i></button>
-                        </div>
-                        <div class="col-auto">
-                            <input type="number" class="form-control quantity" value="1" min="1" max="{{ $product->quantity }}" style="width: 100px; text-align: center;">
-                        </div>
-                        
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" id="btn-plus"><i class="fas fa-plus"></i></button>
-                        </div>
+                    <div class="product-voucher">
+                        @if ($product->voucher)
+                            Voucher của sản phẩm: <span style="color: #35dfac; font-size: 18px;">{{ $product->voucher->voucher_name }}</span>
+                        @else
+                            Không có voucher cho sản phẩm này.
+                        @endif
                     </div>
-                
-                </div>
-                <div class="product-purchase d-flex gap-4">
-                    <a class="btn btn-danger" href="#">Thêm vào giỏ hàng <i class="cart-icon fa-solid fa-cart-shopping" style="font-size: 14px"></i></a>
-                    <a class="btn btn-success" href="#">Mua sản phẩm</a>
+
+                   <form method="POST" action="{{route('products.addToCart')}}">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" type="button" id="btn-minus"><i class="fas fa-minus"></i></button>
+                            </div>
+                            <div class="col-auto">
+                                <input type="number" class="form-control quantity" name="quantity" value="1" min="1" max="{{ $product->quantity }}" style="width: 100px; text-align: center;">
+                            </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="btn-plus"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-purchase">
+                            <button type="submit" class="btn btn-danger">Thêm vào giỏ hàng <i class="cart-icon fa-solid fa-cart-shopping" style="font-size: 14px"></i></button>
+                        </div>
+                    </form>   
                 </div>
             </div>
         </div>

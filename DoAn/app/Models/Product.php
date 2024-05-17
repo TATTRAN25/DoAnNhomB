@@ -53,4 +53,9 @@ class Product extends Model
     {
         return $this->belongsTo(Voucher::class, 'voucher_id', 'voucher_id');
     }
+
+    public function cartItem()
+    {
+        return $this->hasOne(CartItem::class, 'product_id', 'product_id');
+    }
 }

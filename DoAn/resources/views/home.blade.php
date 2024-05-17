@@ -25,7 +25,6 @@
             <div class="p-3">
                 <h2 class="heading-section">sản phẩm</h2>
                 @php $count = 0; @endphp
-
                     @foreach($products as $product)
                         @if($count % 4 == 0)
                             <div class="row mt-3">
@@ -41,7 +40,12 @@
                                         {{ Str::limit($product->product_name, $limit = 75, $end = '...') }}
                                     </h5>
                                     <p class="card-text mt-auto" style="color: #35dfac; font-weight: 600;">{{ number_format($product->price, 0, ',', '.') }}đ</p>
-                                    <a href="#" class="btn btn-success mt-auto">Add to cart</a>
+                                    
+                                    <form action="{{route('products.addToCart')}}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                                        <button type="submit" class="btn btn-success mt-auto add-to-cart-btn">Add to cart</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

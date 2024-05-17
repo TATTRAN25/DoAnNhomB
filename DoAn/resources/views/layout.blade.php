@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{asset('css/detail.css')}}">
     <link rel="stylesheet" href="{{asset('css/product.css')}}">
+    <link rel="stylesheet" href="{{asset('css/order.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>@yield('title', 'Document')</title>
@@ -20,27 +21,25 @@
     @include('includes.header')
     @yield('content')
     @include('includes.footer')
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var paymentMethodRadio = document.querySelectorAll('input[name="payment-method"]');
-            var cardInfoDiv = document.getElementById('card-info');
-
-            for (var i = 0; i < paymentMethodRadio.length; i++) {
-                paymentMethodRadio[i].addEventListener('change', function() {
-                    if (this.value === 'card') {
-                        cardInfoDiv.style.display = 'block';
-                    } else {
-                        cardInfoDiv.style.display = 'none';
-                    }
-                });
-            }
-        });
-    </script>
    
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var paymentMethodRadio = document.querySelectorAll('input[name="payment-method"]');
+        var cardInfoDiv = document.getElementById('card-info');
 
-   <script>
+        for (var i = 0; i < paymentMethodRadio.length; i++) {
+            paymentMethodRadio[i].addEventListener('change', function() {
+                if (this.value === 'card') {
+                    cardInfoDiv.style.display = 'block';
+                } else {
+                    cardInfoDiv.style.display = 'none';
+                }
+            });
+        }
+    });
+
     $(document).ready(function() {
         var debounceTimer;
 
@@ -137,8 +136,110 @@
             }
 
             $('.input-search-ajax').on('input', debounce(searchProducts, 300));
-        });
 
-    </script>
+      
+            $('.increment, .decrement').click(function(e) {
+                e.preventDefault();
+                var button = $(this);
+                var oldValue = parseInt(button.closest('.quantity-selector').find('.quantity-input').val());
+                var maxValue = parseInt(button.closest('.quantity-selector').find('.quantity-input').attr('max'));
+                var productId = button.closest('.product-item').data('product-id');
+                var newValue = oldValue;
+
+                if(button.hasClass('increment')) {
+                    if(newValue >= maxValue) {
+                        return;
+                    }else {
+                        newValue += 1;
+                    }
+                }else {
+                    if(oldValue > 1) {
+                        newValue -= 1;
+                    }
+                }
+
+                $.ajax({
+                    url: '{{route("cart.update")}}',
+                    method: 'POST',
+                    data: {
+                         _token: '{{csrf_token()}}',
+                        productId: productId,
+                        quantity: newValue
+                    },
+                    success: function(res) {
+                        if(res.success) {
+                            // cap nhat lai so luong va san pham cua san pham
+                            button.closest('.quantity-selector').find('.quantity-input').val(newValue);
+                            button.closest('.product-item').find('.total-price').text(res.pricePerProduct);
+
+                            // cap nhat lai tong so luong va tong gia cua gio hang
+                            $('span.total-quantity').text(res.totalQuantity);
+                            $('span.total-price').text(res.totalPrice);
+                        }
+                    }
+                });
+            });
+    });
+
+    $(document).on('click', '.btn-delete', function() {
+        var productId = $(this).closest('.product-item').data('product-id');
+        var row = $(this).closest('tr');
+
+        $.ajax({
+            url: '{{route("cart.delete")}}',
+            method: 'POST',
+            data: {
+                _token: '{{csrf_token()}}',
+                product_id: productId
+            },
+            success: function(res) {
+                if(res.success) {
+                    $('span.total-quantity').text(res.totalQuantity);
+                    $('span.total-price').text(res.totalPrice);
+                    row.remove();   
+                }
+            }
+        });
+    });
+
+    const btnPurchase = document.querySelector('.purchase-action .btn-pucharse');
+
+    if (btnPurchase) {
+        btnPurchase.addEventListener('click', function() {
+            const quantity = document.querySelector('.quantity-input').value;
+            const selectedProducts = [];
+            const selectedQuantities = {};
+
+            const checkboxes = document.querySelectorAll('.product-checkbox:checked');
+
+            checkboxes.forEach(checkbox => {
+                const quantityInput = checkbox.closest('.product-item').querySelector('.quantity-input');
+                const quantity = parseInt(quantityInput.value);
+                const productId = checkbox.value;
+                selectedProducts.push(productId);
+                selectedQuantities[productId] = quantity;
+            });
+
+            $.ajax({
+                url: '{{route("products.checkout")}}',
+                method: 'POST',
+                data: { 
+                    _token: '{{csrf_token()}}',
+                    products: JSON.stringify(selectedProducts), 
+                    quantities: JSON.stringify(selectedQuantities) 
+                },
+                success: function(res) {      
+                    window.location.href = '/checkout-detail';
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    // Display user-friendly error message here, e.g., using an alert or modal
+                    alert('An error occurred while processing your purchase. Please try again later.');
+                }
+            });
+        });
+    }
+        
+</script>
 </body>
 </html>

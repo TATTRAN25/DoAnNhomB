@@ -27,7 +27,7 @@
 
         <div class="nav-user-action-prefix">
             <a href=""><i class="user-icon fa-solid fa-user"></i></a>
-            <a href=""><i class="cart-icon fa-solid fa-cart-shopping"></i></i></a>
+            <a href="{{route('products.cart')}}"><i class="cart-icon fa-solid fa-cart-shopping"></i></i></a>
         </div>
     </nav>
 </header>
