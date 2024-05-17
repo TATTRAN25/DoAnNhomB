@@ -9,7 +9,7 @@
     <form action="{{ route('filter.products') }}" method="POST">
         @csrf
         <div class="filter">
-            <h3>Danh mục</h3>
+            <h3>Bộ lọc</h3>
             <div class="filter-item">
                 <label for="category_id">Danh mục:</label>
                 <select id="category_id" name="category_id">

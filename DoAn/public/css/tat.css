@@ -287,4 +287,80 @@ button[type="button-add"]:hover {
     background-color: #0069d9;
 }
 
+/* Detail product */
+.product-details {
+    display: flex;
+    align-items: center;
+}
 
+.product-image {
+    width: 40%;
+}
+
+.product-image img {
+    width: 100%;
+    height: auto;
+}
+
+.product-info {
+    width: 60%;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.product-info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-info p {
+    margin: 10px 0;
+}
+
+.product-info .product-description {
+    font-style: italic;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.buy-button,
+.add-to-cart-button,
+.review-button {
+    padding: 10px 20px;
+    background-color: #12b886;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+    border-radius: 4px;
+}
+
+.buy-button:hover,
+.add-to-cart-button:hover,
+.review-button:hover {
+    background-color: blue;
+}
+
+.buy-button:hover {
+    transform: translateY(-5px);
+}
+
+.add-to-cart-button:hover {
+    transform: translateY(-10px);
+}
+
+.review-button:hover {
+    transform: translateY(-15px);
+}
