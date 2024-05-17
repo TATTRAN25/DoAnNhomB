@@ -44,6 +44,7 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_id', 'category_id');
     }
 
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');
@@ -59,3 +60,4 @@ class Product extends Model
         return $this->hasOne(CartItem::class, 'product_id', 'product_id');
     }
 }
+

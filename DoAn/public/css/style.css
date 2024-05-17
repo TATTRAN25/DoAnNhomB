@@ -267,6 +267,10 @@ body {
     font-weight: 400;
 }
 
+.btn-purchase:hover {
+    opacity: 0.9;
+}
+
 /* Phần footer chính */
 
 footer {
@@ -430,6 +434,7 @@ textarea:focus {
 
 .price-container .price-info {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin-bottom: 12px;
 }
@@ -532,3 +537,4 @@ textarea:focus {
     max-height: 300px;
     overflow-y: auto;
 }
+

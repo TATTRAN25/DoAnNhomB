@@ -6,6 +6,8 @@ use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 
 class VoucherSeeder extends Seeder
 {
@@ -14,6 +16,7 @@ class VoucherSeeder extends Seeder
      */
     public function run(): void
     {
+
         Voucher::create([
             'voucher_name' => 'Discount10',
             'voucher_quantity' => 100,
@@ -40,5 +43,6 @@ class VoucherSeeder extends Seeder
             'begin_date' => Carbon::now(),
             'end_date' => Carbon::now()->addMonth(),
         ]);
+
     }
 }
