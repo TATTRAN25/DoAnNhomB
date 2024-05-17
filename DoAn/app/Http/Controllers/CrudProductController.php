@@ -14,6 +14,9 @@ class CrudProductController extends Controller
 {
     public function productManagement(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('login')->with('error', 'Vui lòng đăng nhập.');
+        }
         $users = User::all();
         $numberOfRecord = Product::count();
         $perPage = 6;
@@ -42,7 +45,6 @@ class CrudProductController extends Controller
             'product_photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'product_detail' => 'required',
             'quantity' => 'required|numeric',
-            // 'status' => 'required',
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,category_id',
             'user_id' => 'required|exists:users,user_id',
@@ -58,12 +60,12 @@ class CrudProductController extends Controller
         }
         // Thêm điều kiện cho status
         $status = $request->quantity > 0 ? 'active' : 'inactive';
+        
         $check = Product::create([
             'product_name' => $data['product_name'],
             'product_detail' => $data['product_detail'],
             'quantity' => $data['quantity'],
             'status' => $status,
-            // 'status' => $data['status'],
             'price' => $data['price'],
             'category_id' => $data['category_id'],
             'user_id' => $data['user_id'],

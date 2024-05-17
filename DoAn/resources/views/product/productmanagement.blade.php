@@ -3,6 +3,143 @@
 @section('title', 'Checkout')
 
 @section('content')
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Times New Roman", sans-serif;
+        line-height: 1;
+        font-weight: 400;
+        color: #495057;
+        position: relative;
+        padding-bottom: 60px;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    /* MAIN */
+    main {
+        padding: 20px;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+    }
+
+    th {
+        background-color: #12b886;
+    }
+
+    .edit-button,
+    .delete-button {
+        padding: 5px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: #ff132e;
+    }
+
+    .edit-button:hover,
+    .delete-button:hover {
+        color: #999;
+    }
+
+    .edit-button:focus,
+    .delete-button:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    .main-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .add-product-button,
+    .add-voucher-button {
+        padding: 10px 20px;
+        background-color: #12b886;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        margin: 10px;
+        border-radius: 4px;
+        text-decoration: none;
+    }
+
+    .add-product-button:hover,
+    .add-voucher-button:hover {
+        background-color: #0069d9;
+    }
+
+    .img {
+        height: 10rem;
+    }
+
+    .filter {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        background-color: #f5f5f5;
+        padding: 10px;
+    }
+
+    .filter h2 {
+        margin-top: 0;
+        margin-right: 20px;
+    }
+
+    .filter-item {
+        margin-bottom: 10px;
+        margin-right: 20px;
+    }
+
+    .filter-item label {
+        font-weight: bold;
+    }
+
+    .filter-item select {
+        padding: 5px;
+        border-radius: 5px;
+        border: none;
+        width: 200px;
+    }
+
+    .filter-button {
+        display: block;
+        width: 150px;
+        padding: 10px;
+        background-color: #12b886;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    .filter-button:hover {
+        background-color: #0a7d5d;
+    }
+</style>
 <!-- Main -->
 <main>
     <h1>Danh sách sản phẩm</h1>
