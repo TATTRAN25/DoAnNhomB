@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CrudUserController;
 use App\Http\Controllers\ProductController;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 
 Route::controller(CrudUserController::class)->group(function () {
     Route::get('/login', 'login')->name('login');
@@ -42,4 +44,9 @@ Route::controller(CheckoutController::class)->group(function () {
     Route::get('checkout-detail', 'showCheckoutPage')->name('checkout.detail');
     Route::post('checkout/process', 'processCheckout')->name('checkout.process');
     Route::get('order-success', 'showOrderSuccess')->name('orders.success');
+
+Route::get('order-history', [CheckoutController::class, 'showOrderHistory'])->name('orders.history');
+
+Route::get('/', function () {
+    return view('welcome');
 });

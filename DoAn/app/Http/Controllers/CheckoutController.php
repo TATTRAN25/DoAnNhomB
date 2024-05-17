@@ -18,6 +18,7 @@ use Illuminate\Validation\ValidationException;
 
 class CheckoutController extends Controller
 {
+<<<<<<< HEAD
     public function checkout(Request $request)
     {
         $productIds = json_decode($request->input('products'), true);
@@ -131,5 +132,12 @@ class CheckoutController extends Controller
         $user_id = 21;
         $orders = Order::where('user_id', $user_id)->get();
         return view('orders.order_success', compact('orders'));
+
+    public function showOrderHistory()
+    {
+        $user_id = 1;
+        $orders = Order::where('user_id', $user_id)->get();
+        return view('orders.order_history', compact('orders'));
+
     }
 }

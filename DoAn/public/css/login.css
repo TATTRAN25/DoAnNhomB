@@ -6,6 +6,12 @@
     color: white;
 }
 
+.btn-login>a {
+    text-decoration: none;
+    color: white;
+    font-weight: none;
+}
+
 .hr-lines{
     position: relative;
     text-align: center;
@@ -31,6 +37,7 @@
     position: absolute;
     top: 50%;
     right: 0;
+
   }
 
   input[type=number]::-webkit-inner-spin-button,
@@ -38,3 +45,4 @@
     -webkit-appearance: none;
     margin: 0;
   }
+
