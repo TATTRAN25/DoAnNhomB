@@ -2,6 +2,109 @@
 
 @section('title', 'Checkout')
 @section('content')
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Times New Roman", sans-serif;
+        line-height: 1;
+        font-weight: 400;
+        color: #495057;
+        position: relative;
+        padding-bottom: 60px;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    /* edit product */
+    .container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .content {
+        width: 70%;
+        padding: 20px;
+        margin: 0 auto;
+        background-color: #f2f2f2;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+    }
+
+    input,
+    textarea,
+    select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button[type="button"] {
+        display: block;
+        width: 100px;
+        padding: 10px;
+        background-color: #12b886;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button[type="button"]:hover {
+        background-color: #0069d9;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    .save-button,
+    .delete-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .product-image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 150px;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .product-image {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
+
+    .product-image:hover {
+        transform: scale(1.2);
+    }
+</style>
 <!-- Main -->
 <main>
     <div class="container">
