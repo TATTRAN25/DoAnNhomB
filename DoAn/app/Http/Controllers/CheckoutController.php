@@ -11,6 +11,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -75,10 +76,16 @@ class CheckoutController extends Controller
         $orderItems = [];
         $quantities = $request->input('quantities');
 
+        // kiem tra neu khong co san pham nao thi khong mua quay ve gio hang
+        if (empty($productIds) || empty($quantities)) {
+            return redirect()->route('products.cart')->with('error', 'Không có sản phẩm nào trong giỏ hàng.');
+        }
+
         foreach ($productIds as $productId) {
             $product = Product::find($productId);
+            // kiem tra so luong san pham neu nho hon 0 hay nho hon so luong hang dang co thi tra ve cart
             if (!$product || $product->quantity <= 0 || $quantities[$productId] <= 0 || $quantities[$productId] > $product->quantity) {
-                return redirect()->back()->with('error', 'Sản phẩm đã hết hàng.');
+                return redirect()->route('products.cart')->with('error', 'Sản phẩm đã hết hàng.');
             }
             $orderItem = new OrderItem();
             $orderItem->order_id = $order->order_id;
@@ -105,8 +112,16 @@ class CheckoutController extends Controller
         }
 
         $user = User::find($user_id);
-        // Gui mail cho nguoi dat hang
-        Mail::to($user->email)->send(new OrderConfirmation($order, $orderItems));
+        try {
+            // Gui mail cho nguoi dat hang
+            Mail::to($user->email)->send(new OrderConfirmation($order, $orderItems));
+        } catch (\Exception $e) {
+            // Ghi lai loi neu co
+            Log::error('Lỗi ghi gửi xác nhận mail: ' . $e->getMessage());
+            // Chuyen huong ve trang order success voi thong bao
+            return redirect()->route('orders.success')->with('warning', 'Đặt hàng thành công, nhưng không thể gửi email xác nhận.');
+        }
+
 
         return redirect()->route('orders.success');
     }

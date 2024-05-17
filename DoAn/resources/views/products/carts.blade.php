@@ -4,6 +4,12 @@
 @section('content')
     <main class="main-cart">
         <section class="cart-info">
+            @if (session('error'))
+                <div id="error-message" class="alert alert-danger text-center">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <div class="info-page d-flex justify-content-center align-items-center">
                 <h2 class="heading-secondary">Giỏ hàng</h2>
                 <i class="cart-icon fa-solid fa-cart-shopping"></i>
@@ -66,4 +72,15 @@
             </div>
         </section>
     </main>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var errorMessage = document.getElementById('error-message');
+            if (errorMessage) {
+                setTimeout(function () {
+                    errorMessage.style.display = 'none';
+                }, 5000); 
+            }
+        });
+    </script>
 @endsection

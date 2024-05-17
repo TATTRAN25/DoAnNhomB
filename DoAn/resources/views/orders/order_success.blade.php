@@ -6,6 +6,13 @@
 @section('content')
     <div class="container">
       <div class="p-4">
+
+        @if (session('warning'))
+            <div id="error-message" class="alert alert-danger text-center">
+                {{ session('error') }}
+            </div>
+        @endif
+
         @if ($orders->count() > 0)
             <div class="d-flex align-items-baseline justify-content-center gap-3">
                 <h1 class="mt-3 order-success-name">Đặt hàng thành công</h1>
@@ -74,4 +81,15 @@
             @endforeach
         </div>
     </div>
+
+     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var errorMessage = document.getElementById('error-message');
+                if (errorMessage) {
+                    setTimeout(function () {
+                        errorMessage.style.display = 'none';
+                    }, 5000); 
+                }
+        });
+    </script>
 @endsection

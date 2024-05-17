@@ -14,11 +14,13 @@
     <ul>
         @foreach ($orderItems as $item)
             <li>Mã sản phẩm: {{ $item->product->product_id }}</li>
-            <li>Tên sản phẩm: {{ $item->product->product_name }} - Quantity: {{ $item->quantity_order }}</li>
+            <li>Tên sản phẩm: {{ $item->product->product_name }}</li>
+            <li>Số lượng: {{ $item->quantity_order }}</li>
             <li>Giá sản phẩm: {{number_format($item->quantity_order * $item->product->price, 0, ',', '.')}} đồng</li>
             <li>----------------------------------------------</li>
         @endforeach
     </ul>
     <strong>Tổng giá tiền: {{number_format($order->total_price, 0, ',', '.') }} đồng</strong>
+    <p><i>Chúc bạn nhận hàng vui vẻ! 😍😘💗</i></p>
 </body>
 </html>
