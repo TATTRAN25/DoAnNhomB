@@ -23,7 +23,7 @@
                         <p class="product-price">Giá sản phẩm <span style="color: #35dfac; font-size: 18px">{{number_format($product->price, 0, ',', '.')}} đ</span></p>
                         <p class="product-status" style="font-weight: 700; color: {{ $product->status === 'active' ? 'green' : 'red' }};">
                         Tình trạng:
-                        @if($product->status === 'active')
+                        @if($product->quantity > 0)
                             Còn hàng
                         @else
                             Hết hàng

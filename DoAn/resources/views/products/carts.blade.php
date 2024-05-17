@@ -2,7 +2,6 @@
 
 @section('title', 'Cart Details')
 @section('content')
-    <main class="main-cart">
         <section class="cart-info">
             @if (session('error'))
                 <div id="error-message" class="alert alert-danger text-center">
@@ -71,7 +70,6 @@
                 </div>
             </div>
         </section>
-    </main>
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {

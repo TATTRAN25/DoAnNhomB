@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="{{asset('css/detail.css')}}">
     <link rel="stylesheet" href="{{asset('css/product.css')}}">
     <link rel="stylesheet" href="{{asset('css/order.css')}}">
-    <link rel="stylesheet" href="{{ asset('css/tat.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>@yield('title', 'Document')</title>
@@ -144,6 +143,7 @@
       
             $('.increment, .decrement').click(function(e) {
                 e.preventDefault();
+            
                 var button = $(this);
                 var oldValue = parseInt(button.closest('.quantity-selector').find('.quantity-input').val());
                 var maxValue = parseInt(button.closest('.quantity-selector').find('.quantity-input').attr('max'));

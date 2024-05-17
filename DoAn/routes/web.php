@@ -57,19 +57,7 @@ Route::controller(CrudProductController::class)->group(function () {
     Route::put('editproduct/{product_id}', 'update')->name('product.update');
     Route::delete('deleteproduct/{id}', 'deleteProduct')->name('product.deleteProduct');
 });
-// Route::get('order-history', [CheckoutController::class, 'showOrderHistory'])->name('orders.history');
 
-// Route::get('productmanagement', [CrudProductController::class, 'productManagement'])->name('product.productManagement');
-
-// Route::post('/filter-products', [CrudProductController::class, 'filterProducts'])->name('filter.products');
-
-// Route::get('addproduct', [CrudProductController::class, 'addProduct'])->name('product.addProduct');
-// Route::post('addproduct', [CrudProductController::class, 'store'])->name('product.store');
-
-// Route::get('editproduct/{product_id}', [CrudProductController::class, 'editProduct'])->name('product.editProduct');
-// Route::put('editproduct/{product_id}', [CrudProductController::class, 'update'])->name('product.update');
-
-// Route::delete('deleteproduct/{id}', [CrudProductController::class, 'deleteProduct'])->name('product.deleteProduct');
 
 
 Route::get('/', function () {
