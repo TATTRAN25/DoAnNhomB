@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(ProductController::class)->group(function () {
+    Route::get('home', 'home')->name('home');
+    Route::get('products', 'getProducts')->name('products');
+    Route::get('product-detail/{productId}', 'getProductDetail')->name('products.detail');
+    Route::get('product-search', 'search')->name('products.search');
 });
