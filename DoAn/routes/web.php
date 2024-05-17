@@ -22,4 +22,5 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('cart', 'cartDetail')->name('products.cart');
     Route::post('add-to-cart', 'addToCart')->middleware('storePreviousUrl')->name('products.addToCart');
     Route::post('cart/delete', 'deleteCart')->name('cart.delete');
+    Route::post('cart/update', 'updateCart')->name('cart.update');
 });
