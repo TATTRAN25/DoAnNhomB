@@ -21,4 +21,5 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('product-search', 'search')->name('products.search');
     Route::get('cart', 'cartDetail')->name('products.cart');
     Route::post('add-to-cart', 'addToCart')->middleware('storePreviousUrl')->name('products.addToCart');
+    Route::post('cart/delete', 'deleteCart')->name('cart.delete');
 });
