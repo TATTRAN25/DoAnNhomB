@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+
 
 class UserController extends Controller
 {
@@ -18,4 +20,10 @@ class UserController extends Controller
     {
         return view('product.ranking');
     }
+
+    public function index()
+    {
+        return view('products.index');
+    }
+
 }
