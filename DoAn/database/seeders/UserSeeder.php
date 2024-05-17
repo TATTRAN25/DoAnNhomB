@@ -23,7 +23,8 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'is_admin' => 1,
-
+        ]);
+        
         DB::table('users')->insert([
             'user_name' => 'John Doe',
             'email' => 'johndoe@example.com',

@@ -51,7 +51,7 @@
                 <th>Trạng thái</th>
                 <th>Giá</th>
                 <th>Danh mục</th>
-                <th>Mã người dùng</th>
+                <th>Tên người bán</th>
                 <th>Mô tả sản phẩm</th>
                 <th>Thao tác</th>
             </tr>
@@ -60,13 +60,13 @@
             @foreach($filteredProducts ?? $products as $product)
             <tr>
                 <td>{{$product->product_id}}</td>
-                <td><img src="{{ asset('uploads/images/' . $product->product_photo) }}" alt="Ảnh sản phẩm" width="100"></td>
+                <td><img src="{{ asset($product->product_photo) }}" alt="Ảnh sản phẩm" width="100"></td>
                 <td>{{$product->product_name}}</td>
                 <td>{{$product->quantity}}</td>
                 <td>{{$product->status}}</td>
                 <td>{{ number_format($product->price, 0, ',', '.') }} VND</td>
                 <td>{{$product->category->category_name}}</td>
-                <td>{{$product->user_id}}</td>
+                <td>{{$product->user->user_name }}</td>
                 <td>{{$product->product_detail}}</td>
                 <td>
                     <a class="edit-button" href="{{ route('product.update', ['product_id' => $product->product_id]) }}"><i class="fas fa-pencil-alt"></i></a>

@@ -14,8 +14,9 @@ class CrudProductController extends Controller
 {
     public function productManagement(Request $request)
     {
+        $users = User::all();
         $numberOfRecord = Product::count();
-        $perPage = 10;
+        $perPage = 6;
         $numberOfPage = $numberOfRecord % $perPage == 0 ?
             (int) ($numberOfRecord / $perPage) : (int) ($numberOfRecord / $perPage) + 1;
         $pageIndex = $request->input('pageIndex', 1);
@@ -49,16 +50,14 @@ class CrudProductController extends Controller
 
         if ($request->hasFile('product_photo')) {
             $file = $request->file('product_photo');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('uploads/images/', $filename);
+            $imageName = time() . '_' . $file->getClientOriginalName();
+            $file->move('uploads/images/', $imageName);
             $data = $request->all();
         } else {
             return back()->with('error', 'Image upload failed.');
         }
         // Thêm điều kiện cho status
         $status = $request->quantity > 0 ? 'Active' : 'Inactive';
-
         $check = Product::create([
             'product_name' => $data['product_name'],
             'product_detail' => $data['product_detail'],
@@ -68,7 +67,7 @@ class CrudProductController extends Controller
             'price' => $data['price'],
             'category_id' => $data['category_id'],
             'user_id' => $data['user_id'],
-            'product_photo' => $filename,
+            'product_photo' => 'uploads/images/' . $imageName,
         ]);
 
         return redirect()->route('product.productManagement')->with('mes', 'Thêm sản phẩm thành công');
@@ -112,7 +111,7 @@ class CrudProductController extends Controller
         $product->price = $input['price'];
         $product->category_id = $input['category_id'];
         $product->user_id = $input['user_id'];
-        //Kiem tra tep tin co truong du lieu avatar hay kh
+        // Kiểm tra tệp tin có trường dữ liệu avatar hay không
         if ($request->hasFile('product_photo')) {
             $oldphoto = 'uploads/images/' . $product->product_photo;
             if (File::exists($oldphoto)) {
@@ -120,11 +119,12 @@ class CrudProductController extends Controller
             }
 
             $file = $request->file('product_photo');
-            $extension = $file->getClientOriginalExtension(); //Lay ten mo rong .jpg, .png...
-            $filename = time() . '.' . $extension; //
-            $file->move('uploads/images/', $filename);  //upload len thu muc avatar trong piblic
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('uploads/images/', $filename);
+            $product->product_photo = $filename;
         }
-        $product->product_photo = $filename;
+        $product->product_photo = 'uploads/images/' . $filename;
         $product->update();
 
         // Chuyển hướng người dùng với thông báo thành công

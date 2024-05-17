@@ -86,7 +86,7 @@
                     <select name="user_id" id="user_id" class="form-control">
                         <option value="">Chọn người bán</option>
                         @foreach ($users as $user)
-                        <option value="{{ $user->user_id }}">{{ $user->user_name }}</option>
+                        <option value="{{ $user->user_id }}">{{ $user->user_name }} - {{ $user->user_id }}</option>
                         @endforeach
                     </select>
                     @error('user_id')
