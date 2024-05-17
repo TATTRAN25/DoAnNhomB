@@ -44,7 +44,8 @@ Route::controller(CheckoutController::class)->group(function () {
     Route::get('checkout-detail', 'showCheckoutPage')->name('checkout.detail');
     Route::post('checkout/process', 'processCheckout')->name('checkout.process');
     Route::get('order-success', 'showOrderSuccess')->name('orders.success');
-
+    Route::get('order-history', 'showOrderHistory')->name('orders.success');
+});
 Route::get('order-history', [CheckoutController::class, 'showOrderHistory'])->name('orders.history');
 
 Route::get('/', function () {
