@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,12 @@ Route::controller(ProductController::class)->group(function () {
     Route::post('add-to-cart', 'addToCart')->middleware('storePreviousUrl')->name('products.addToCart');
     Route::post('cart/delete', 'deleteCart')->name('cart.delete');
     Route::post('cart/update', 'updateCart')->name('cart.update');
+});
+
+
+Route::controller(CheckoutController::class)->group(function () {
+    Route::post('checkout', 'checkout')->name('products.checkout');
+    Route::get('checkout-detail', 'showCheckoutPage')->name('checkout.detail');
+    Route::post('checkout/process', 'processCheckout')->name('checkout.process');
+    Route::get('order-success', 'showOrderSuccess')->name('orders.success');
 });
