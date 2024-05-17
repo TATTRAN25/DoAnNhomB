@@ -14,23 +14,19 @@ class ProductController extends Controller
 {
     public function productManagement(Request $request)
     {
-        $numberOfRecord = Product::count();
-        $perPage = 10;
-        $numberOfPage = $numberOfRecord % $perPage == 0 ?
-            (int) ($numberOfRecord / $perPage) : (int) ($numberOfRecord / $perPage) + 1;
-        $pageIndex = $request->input('pageIndex', 1);
-        $pageIndex = max(1, min($pageIndex, $numberOfPage));
-        $products = Product::orderByDesc('product_id')
-            ->skip(($pageIndex - 1) * $perPage)
-            ->take($perPage)
-            ->get();
-        return view('product.productmanagement', compact('products', 'numberOfPage', 'pageIndex'));
+        $user_id = Auth::id();
+
+        // Lấy danh sách sản phẩm của người dùng hiện tại
+        $products = Product::where('user_id', $user_id)->paginate(10);
+
+        return view('product.productmanagement', compact('products'));
     }
 
     public function addProduct()
     {
         $users = User::all();
         $categories = Category::all();
+
         return view('product.addproduct', compact('users', 'categories'));
     }
 
@@ -41,10 +37,8 @@ class ProductController extends Controller
             'product_photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'product_detail' => 'required',
             'quantity' => 'required|numeric',
-            // 'status' => 'required',
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,category_id',
-            'user_id' => 'required|exists:users,user_id',
         ]);
 
         if ($request->hasFile('product_photo')) {
@@ -58,19 +52,21 @@ class ProductController extends Controller
         }
         // Thêm điều kiện cho status
         $status = $request->quantity > 0 ? 'Active' : 'Inactive';
+        $user_id = Auth::id();
 
         $check = Product::create([
             'product_name' => $data['product_name'],
             'product_detail' => $data['product_detail'],
             'quantity' => $data['quantity'],
             'status' => $status,
-            // 'status' => $data['status'],
             'price' => $data['price'],
             'category_id' => $data['category_id'],
-            'user_id' => $data['user_id'],
+            'user_id' => $user_id,
             'product_photo' => $filename,
         ]);
-
+        $product = new Product();
+        $product->user_id = $user_id; // Gán user_id ở đây
+        // Đặt các trường khác
         return redirect()->route('product.productManagement')->with('mes', 'Thêm sản phẩm thành công');
     }
 
@@ -177,11 +173,10 @@ class ProductController extends Controller
             'numberOfPage' => 1,
             'pageIndex' => 1
         ]);
-
+    }
 
     public function home()
     {
         return view('home');
-
     }
 }

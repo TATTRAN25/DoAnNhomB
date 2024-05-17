@@ -29,7 +29,7 @@ Route::get('editproduct/{product_id}', [ProductController::class, 'editProduct']
 Route::put('editproduct/{product_id}', [ProductController::class, 'update'])->name('product.update');
 
 Route::delete('deleteproduct/{id}', [ProductController::class, 'deleteProduct'])->name('product.deleteProduct');
-=======
+
 Route::controller(CrudUserController::class)->group(function() {
     Route::get('/login', 'login')->name('login');
     Route::post('/login', 'authUser')->name('auth.user');

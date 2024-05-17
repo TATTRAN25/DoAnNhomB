@@ -86,25 +86,7 @@
         <a class="add-voucher-button" href="#">Thêm voucher</a>
     </div>
 
-    <!-- Phân trang  -->
-    @if($numberOfPage > 1)
-    <div class="d-flex justify-content-center align-items-center my-2">
-        @if($pageIndex > 1)
-        <a class="btn btn-success" href="{{route('product.productManagement', ['pageIndex' => $pageIndex - 1])}}">Trước</a>
-        @endif
-        @for($i = 1; $i <= $numberOfPage; $i++) @if($i==$pageIndex) <a class="btn btn-primary ms-2" href="{{route('product.productManagement', ['pageIndex' => $i])}}">{{$i}}</a>
-            @else
-            @if($i == 1 || $i == $numberOfPage || ($i <= $pageIndex + 4 && $i>= $pageIndex - 4))
-                <a class="btn btn-success ms-2" href="{{route('product.productManagement', ['pageIndex' => $i])}}">{{$i}}</a>
-                @elseif($i == $pageIndex - 5 || $i == $pageIndex + 5)
-                <a class="btn btn-success ms-2" href="{{route('product.productManagement', ['pageIndex' => $i])}}">...</a>
-                @endif
-                @endif
-                @endfor
-                @if($pageIndex < $numberOfPage) <a class="btn btn-success ms-2" href="{{route('product.productManagement', ['pageIndex' => $pageIndex + 1])}}">Sau</a>
-                    @endif
-    </div>
-    @endif
+    
 
 </main>
 
