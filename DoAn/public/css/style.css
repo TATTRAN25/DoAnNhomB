@@ -254,6 +254,10 @@ footer {
     color: #fff;
     padding: 40px 0;
     text-align: center;
+<<<<<<< HEAD
+=======
+    margin-top: 3rem;
+>>>>>>> laravel-10x/2-login
 }
 
 /* Phần footer-container */

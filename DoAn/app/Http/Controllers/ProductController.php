@@ -177,5 +177,11 @@ class ProductController extends Controller
             'numberOfPage' => 1,
             'pageIndex' => 1
         ]);
+
+
+    public function home()
+    {
+        return view('home');
+
     }
 }

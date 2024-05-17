@@ -1,7 +1,7 @@
 <header class="header">
     <nav class="nav-prefix">
         <a href="#" class="nav-logo-prefix">
-            <img class="logo-img" src="{{asset('images/logo.png')}}" alt="Logo Shop">
+            <img class="logo-img" src="{{asset('images/logo.jpg')}}" alt="Logo Shop">            
         </a>
 
         <div class="nav-menu-prefix">
@@ -21,8 +21,16 @@
         </div>
 
         <div class="nav-user-action-prefix">
+
+            <a href="{{ route('account') }}"><i class="user-icon fa-solid fa-user"></i></a>
+            <a href=""><i class="cart-icon fa-solid fa-cart-shopping"></i></i></a>
+        </div>
+    </nav>
+
             <a href=""><i class="user-icon fa-solid fa-user"></i></a>
             <a href=""><i class="cart-icon fa-solid fa-cart-shopping"></i></i></a>
         </div>
     </nav>
+
 </header>
+

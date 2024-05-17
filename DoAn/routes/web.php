@@ -1,5 +1,8 @@
 <?php
 
+
+use App\Http\Controllers\CrudUserController;
+
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('productmanagement', [ProductController::class, 'productManagement'])->name('product.productManagement');
 
 Route::post('/filter-products', [ProductController::class, 'filterProducts'])->name('filter.products');
@@ -25,7 +29,19 @@ Route::get('editproduct/{product_id}', [ProductController::class, 'editProduct']
 Route::put('editproduct/{product_id}', [ProductController::class, 'update'])->name('product.update');
 
 Route::delete('deleteproduct/{id}', [ProductController::class, 'deleteProduct'])->name('product.deleteProduct');
+=======
+Route::controller(CrudUserController::class)->group(function() {
+    Route::get('/login', 'login')->name('login');
+    Route::post('/login', 'authUser')->name('auth.user');
+    Route::get('/register', 'register')->name('register');
+    Route::post('/register', 'postRegister')->name('post.register');
+    Route::get('/logout', 'logout')->name('logout');
+    Route::get('/account', 'viewAccountInfo')->name('account');
+    Route::get('/list_user', 'listUser')->name('user.list');
+});
+
 
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/home', [ProductController::class, 'home'])->name('home');
