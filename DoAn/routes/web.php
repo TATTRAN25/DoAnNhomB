@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CrudUserController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,15 +16,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('home', [ProductController::class, 'home'])->name('home');
-Route::get('products', [ProductController::class, 'getProducts'])->name('products');
-Route::get('product-detail/{productId}', [ProductController::class, 'getProductDetail'])->name('products.detail');
-Route::get('product-search', [ProductController::class, 'search'])->name('products.search');
-Route::get('cart', [ProductController::class, 'cartDetail'])->name('products.cart');
-Route::post('add-to-cart', [ProductController::class, 'addToCart'])->middleware('storePreviousUrl')->name('products.addToCart');
-Route::post('cart/delete', [ProductController::class, 'deleteCart'])->name('cart.delete');
-Route::post('cart/update', [ProductController::class, 'updateCart'])->name('cart.update');
-Route::post('checkout', [CheckoutController::class, 'checkout'])->name('products.checkout');
-Route::get('checkout-detail', [CheckoutController::class, 'showCheckoutPage'])->name('checkout.detail');
-Route::post('checkout/process', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
-Route::get('order-success', [CheckoutController::class, 'showOrderSuccess'])->name('orders.success');
+Route::controller(CrudUserController::class)->group(function () {
+    Route::get('/login', 'login')->name('login');
+    Route::post('/login', 'authUser')->name('auth.user');
+    Route::get('/register', 'register')->name('register');
+    Route::post('/register', 'postRegister')->name('post.register');
+    Route::get('/logout', 'logout')->name('logout');
+    Route::get('/account', 'viewAccountInfo')->name('account');
+    Route::get('/list_user', 'listUser')->name('user.list');
+});
+
+Route::controller(ProductController::class)->group(function () {
+    Route::get('home', 'home')->name('home');
+    Route::get('products', 'getProducts')->name('products');
+    Route::get('product-detail/{productId}', 'getProductDetail')->name('products.detail');
+    Route::get('product-search', 'search')->name('products.search');
+    Route::get('cart', 'cartDetail')->name('products.cart');
+    Route::post('add-to-cart', 'addToCart')->middleware('storePreviousUrl')->name('products.addToCart');
+    Route::post('cart/delete', 'deleteCart')->name('cart.delete');
+    Route::post('cart/update', 'updateCart')->name('cart.update');
+});
+
+Route::controller(CheckoutController::class)->group(function () {
+    Route::post('checkout', 'checkout')->name('products.checkout');
+    Route::get('checkout-detail', 'showCheckoutPage')->name('checkout.detail');
+    Route::post('checkout/process', 'processCheckout')->name('checkout.process');
+    Route::get('order-success', 'showOrderSuccess')->name('orders.success');
+});

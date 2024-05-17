@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderConfirmation;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -42,13 +46,6 @@ class CheckoutController extends Controller
         $validator = Validator::make($request->all(), [
             'address' => 'required|string|max:255',
             'extra_message' => 'nullable|string|max:255',
-            // 'card' => 'nullable|string|max:255',
-            // 'expiry' => 'nullable|string|max:7',
-            // 'cvv' => 'nullable|string|max:3',
-            // 'product_ids_json' => 'required|array',
-            // 'product_ids_json.*' => 'required|integer|exists:products,product_id',
-            // 'quantities' => 'required|array',
-            // 'quantities.*' => 'required|integer|min:1',
         ]);
 
         if (!$request->has('payment-method-cod') && !$request->has('payment-method-card')) {
@@ -59,6 +56,10 @@ class CheckoutController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+
+        // Lay user id
+        $user_id = Auth::id();
+
         $order = new Order();
         $order->total_price = $request->input('total_price');
         $order->total_quantity = $request->input('total_quantity');
@@ -66,12 +67,19 @@ class CheckoutController extends Controller
         $order->address = $request->input('address');
         $order->order_date = Carbon::now();
         $order->delivery_date = Carbon::now()->addDays(3);
-        $order->user_id = 1;
+        $order->user_id = $user_id;
         $order->save();
 
 
         $productIds = json_decode($request->input('product_ids_json'), true);
+        $orderItems = [];
+        $quantities = $request->input('quantities');
+
         foreach ($productIds as $productId) {
+            $product = Product::find($productId);
+            if (!$product || $product->quantity <= 0 || $quantities[$productId] <= 0 || $quantities[$productId] > $product->quantity) {
+                return redirect()->back()->with('error', 'Sản phẩm đã hết hàng.');
+            }
             $orderItem = new OrderItem();
             $orderItem->order_id = $order->order_id;
             $orderItem->product_id = $productId;
@@ -79,24 +87,33 @@ class CheckoutController extends Controller
             $orderItem->payment_method = $request->input('payment-method');
             $orderItem->status_order = 'pending';
             $orderItem->save();
+
+
+            // Tru di so luong san pham da mua va cap nhat lai 
+            $product->quantity -= $quantities[$productId];
+            $product->save();
+
+            $orderItems[] = $orderItem;
         }
 
-        $user_id = 1;
         $cart = Cart::where('user_id', $user_id)->first();
         if ($cart) {
             $cartItems = $cart->items()->whereIn('product_id', $productIds)->get();
             if ($cartItems->isNotEmpty()) {
                 $cartItems->each->delete();
-                return redirect()->route('orders.success');
             }
         }
 
-        return redirect()->back()->withErrors(['message' => 'Order failed. Please try again.'])->withInput();
+        $user = User::find($user_id);
+        // Gui mail cho nguoi dat hang
+        Mail::to($user->email)->send(new OrderConfirmation($order, $orderItems));
+
+        return redirect()->route('orders.success');
     }
 
     public function showOrderSuccess()
     {
-        $user_id = 1;
+        $user_id = 21;
         $orders = Order::where('user_id', $user_id)->get();
         return view('orders.order_success', compact('orders'));
     }

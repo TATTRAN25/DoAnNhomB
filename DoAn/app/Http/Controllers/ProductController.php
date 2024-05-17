@@ -6,11 +6,15 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
     public function home()
     {
+        if (!Auth::check()) {
+            return redirect('login')->with('error', 'Vui lòng đăng nhập.');
+        }
         $products = Product::orderBy('created_at', 'desc')->take(8)->get();
         // return response()->json($products);
         return view('home', ['products' => $products]);
@@ -18,12 +22,19 @@ class ProductController extends Controller
 
     public function getProducts()
     {
+        if (!Auth::check()) {
+            return redirect('login')->with('error', 'Vui lòng đăng nhập.');
+        }
+
         $products = Product::paginate(8);
         return view('products.products', compact('products'));
     }
 
     public function getProductDetail($productId)
     {
+        if (!Auth::check()) {
+            return redirect('login')->with('error', 'Vui lòng đăng nhập.');
+        }
 
         $product = Product::findOrFail($productId);
         return view('products.productdetail', ['product' => $product]);
@@ -38,7 +49,11 @@ class ProductController extends Controller
 
     public function cartDetail()
     {
-        $user_id = 1;
+        if (!Auth::check()) {
+            return redirect('login')->with('error', 'Vui lòng đăng nhập.');
+        }
+
+        $user_id = Auth::id();
         $cart = Cart::where('user_id', $user_id)->first();
 
         if ($cart) {
@@ -53,23 +68,25 @@ class ProductController extends Controller
             foreach ($cart->items as $item) {
                 $totalPrice += $item->quantity * $item->product->price;
             }
-
-            return view('products.carts', [
-                'cartItems' => $cartItems,
-                'totalQuantity' => $totalQuantity,
-                'totalPrice' => $totalPrice
-            ]);
+        } else {
+            $cartItems = new \Illuminate\Pagination\LengthAwarePaginator([], 0, 4);
+            $totalQuantity = 0;
+            $totalPrice = 0;
         }
 
-        return view('products.carts');
+        return view('products.carts', [
+            'cartItems' => $cartItems,
+            'totalQuantity' => $totalQuantity,
+            'totalPrice' => $totalPrice
+        ]);
     }
 
     public function addToCart(Request $request)
     {
+        $user_id = Auth::id();
         $product_id = $request->input('product_id');
         $quantity = $request->input('quantity', 1);
-        $cart = Cart::where('user_id', 1)->first();
-        $user_id = 1;
+        $cart = Cart::where('user_id', $user_id)->first();
 
         // Kiem tra neu gio hang chua co trong user thi tao gio hang
         if (!$cart) {
@@ -103,8 +120,10 @@ class ProductController extends Controller
 
     public function deleteCart(Request $request)
     {
+        $user_id = Auth::id();
+
         $product_id = $request->input('product_id');
-        $user_id = 1;
+
 
         $cart = Cart::where('user_id', $user_id)->first();
 
@@ -138,9 +157,10 @@ class ProductController extends Controller
 
     public function updateCart(Request $request)
     {
+        $user_id = Auth::id();
+
         $product_id = $request->productId;
         $quantity = $request->quantity;
-        $user_id = 1;
 
         $cart = Cart::where('user_id', $user_id)->first();
 

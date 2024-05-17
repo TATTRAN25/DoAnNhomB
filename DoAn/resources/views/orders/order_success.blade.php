@@ -6,10 +6,12 @@
 @section('content')
     <div class="container">
       <div class="p-4">
+        @if ($orders->count() > 0)
             <div class="d-flex align-items-baseline justify-content-center gap-3">
                 <h1 class="mt-3 order-success-name">Đặt hàng thành công</h1>
                 <i class="icon-check-success fa-solid fa-check"></i>
-            </div>
+            </div>     
+        @endif
     
             @foreach ($orders as $index => $order)
 
