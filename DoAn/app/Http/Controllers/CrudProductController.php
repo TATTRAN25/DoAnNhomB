@@ -57,7 +57,7 @@ class CrudProductController extends Controller
             return back()->with('error', 'Image upload failed.');
         }
         // Thêm điều kiện cho status
-        $status = $request->quantity > 0 ? 'Active' : 'Inactive';
+        $status = $request->quantity > 0 ? 'active' : 'inactive';
         $check = Product::create([
             'product_name' => $data['product_name'],
             'product_detail' => $data['product_detail'],
@@ -100,7 +100,7 @@ class CrudProductController extends Controller
             'category_id' => 'required|exists:categories,category_id',
             'user_id' => 'required|exists:users,user_id',
         ]);
-        $status = $request->quantity > 0 ? 'Active' : 'Inactive';
+        $status = $request->quantity > 0 ? 'active' : 'inactive';
 
         $product = Product::find($input['product_id']);
         $product->product_name = $input['product_name'];

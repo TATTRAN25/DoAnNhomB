@@ -44,8 +44,8 @@
                 <div class="form-group">
                     <label for="status">Trạng thái:</label>
                     <select id="status" name="status" disabled>
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
+                        <option value="active">active</option>
+                        <option value="inactive">inactive</option>
                     </select>
                     @error('status')
                     <span class="text-danger">{{ $message }}</span>

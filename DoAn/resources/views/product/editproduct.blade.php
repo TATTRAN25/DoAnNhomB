@@ -29,8 +29,8 @@
                 <div>
                     <label for="status">Trạng thái:</label>
                     <select id="status" name="status">
-                        <option value="Active" {{$product->status == 'Active' ? 'selected' : ''}} {{ $product->quantity <= 0 ? 'disabled' : '' }}>Active</option>
-                        <option value="Inactive" {{$product->status == 'Inactive' ? 'selected' : ''}} {{ $product->quantity <= 0 ? 'disabled' : '' }}>Inactive</option>
+                        <option value="active" {{$product->status == 'active' ? 'selected' : ''}} {{ $product->quantity <= 0 ? 'disabled' : '' }}>active</option>
+                        <option value="inactive" {{$product->status == 'inactive' ? 'selected' : ''}} {{ $product->quantity <= 0 ? 'disabled' : '' }}>inactive</option>
                     </select>
                 </div>
                 <!-- Giá -->
@@ -63,9 +63,8 @@
                     <div class="product-image-container">
                         <img id="product_photo_preview" src="{{ asset('uploads/images/' . $product->product_photo) }}" alt="Ảnh sản phẩm" class="product-image">
                     </div>
-                    <input id="product_photo" type="file" class="form-control @error('product_photo') is-invalid @enderror" name="product_photo" required autocomplete="product_photo">
+                    <input id="product_photo_input" type="file" class="form-control @error('product_photo') is-invalid @enderror" name="product_photo" required autocomplete="product_photo" onchange="previewProductPhoto(event)">
                 </div>
-
                 <button type="submit">Lưu</button>
             </form>
         </div>
@@ -74,6 +73,15 @@
 </main>
 
 <script>
+    function previewProductPhoto(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById('product_photo_preview');
+            output.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
     document.getElementById('quantity').addEventListener('input', function() {
         var quantity = document.getElementById('quantity').value;
         var status = document.getElementById('status');
