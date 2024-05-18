@@ -128,15 +128,14 @@ class CheckoutController extends Controller
 
     public function showOrderSuccess()
     {
-        $user_id = 21;
+        $user_id = Auth::id();
         $orders = Order::where('user_id', $user_id)->get();
         return view('orders.order_success', compact('orders'));
     }
     public function showOrderHistory()
     {
-        $user_id = 1;
+        $user_id = Auth::id();
         $orders = Order::where('user_id', $user_id)->get();
         return view('orders.order_history', compact('orders'));
-
     }
 }

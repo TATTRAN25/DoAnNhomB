@@ -460,7 +460,6 @@ textarea:focus {
 
 .home-img {
     background-image: url("../images/products/b18.jpg");
-    background-image: url("../images/b18.jpg");
     background-size: cover;
     background-position: center;
     width: 100%;
