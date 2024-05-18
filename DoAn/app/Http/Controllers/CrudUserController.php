@@ -50,7 +50,7 @@ class CrudUserController extends Controller
             'phone_number' => 'nullable',
             'email' => 'required|email|max:255|unique:users',
             'date_of_birth' => 'required',
-            'user_image' => 'required|max:100'
+            'user_image' => 'required|image'
         ]);
 
         $data = $request->all();
@@ -71,7 +71,7 @@ class CrudUserController extends Controller
         ]);
 
         $profile = UserDetail::create([
-            'user_id' => $user['id'],
+            'user_id' => $user['user_id'],
             'phone_number' => $data['phone_number'],
             'date_of_birth' => $data['date_of_birth'],
             'sex' => $data['sex'],
